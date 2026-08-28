@@ -14,17 +14,18 @@ export default function Hero() {
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[60%_40%] lg:gap-8">
           <div>
             <span
-              className="animate-fade-up inline-flex items-center rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 font-mono text-[0.8125rem] text-ink"
+              className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1.5 font-mono text-[0.8125rem] text-ink"
               style={{ animationDelay: "0ms" }}
             >
-              ⚡ Primera versión lista en 5 a 7 días
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+              Primera versión lista en 5 a 7 días
             </span>
 
             <h1
               className="animate-fade-up mt-5 font-heading text-[2.25rem] leading-[1.15] font-semibold text-ink sm:text-5xl lg:text-[4rem] lg:leading-[1.1]"
               style={{ animationDelay: "90ms" }}
             >
-              ¡Hola! Soy Maximo 👋
+              ¡Hola! Soy Maximo
             </h1>
 
             <p

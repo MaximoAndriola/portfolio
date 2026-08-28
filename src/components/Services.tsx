@@ -48,7 +48,9 @@ export default function Services() {
           {SERVICES.map((service, i) => (
             <Reveal key={service.title} delay={i * 80}>
               <div className="h-full rounded-xl bg-surface p-8 shadow-sm transition-all duration-200 md:hover:-translate-y-0.5 md:hover:shadow-md">
-                <service.icon className="h-7 w-7 text-brand" />
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10">
+                  <service.icon className="h-6 w-6 text-brand" />
+                </div>
                 <h3 className="mt-4 font-heading text-lg font-semibold text-ink">
                   {service.title}
                 </h3>

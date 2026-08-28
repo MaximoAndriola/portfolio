@@ -18,7 +18,7 @@ export default function Hero() {
               style={{ animationDelay: "0ms" }}
             >
               <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden="true" />
-              Primera versión lista en 5 a 7 días
+              Tu primera versión, lista en 5 a 7 días
             </span>
 
             <h1

@@ -2,12 +2,15 @@
 
 ## 1. Hero
 
-**Título:** ¡Hola! Soy Maximo 👋
+**Título:** ¡Hola! Soy Maximo
 
 **Subtítulo:** Desarrollo páginas web y sistemas a medida para que tu
 negocio ahorre tiempo y deje de depender de planillas sueltas.
 
-**Bajada / sello de confianza:** ⚡ Primera versión lista en 5 a 7 días
+**Bajada / sello de confianza:** Tu primera versión, lista en 5 a 7 días
+*(ajustado del draft original — "Primera versión lista en 5 a 7 días" sin
+el "tu" se leía ambiguo, como si describiera esta misma landing en vez de
+prometer plazo sobre el proyecto del visitante)*
 
 **Botón principal:** Escribime por WhatsApp
 

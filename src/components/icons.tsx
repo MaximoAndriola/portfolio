@@ -128,6 +128,24 @@ export function BoltIcon({ className = "w-6 h-6" }: IconProps) {
   );
 }
 
+export function ClockIcon({ className = "w-4 h-4" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5V12l3 2" />
+    </svg>
+  );
+}
+
 export function ArrowDownIcon({
   className = "w-4 h-4",
   strokeWidth = "1.8",

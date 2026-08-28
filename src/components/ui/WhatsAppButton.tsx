@@ -26,9 +26,9 @@ export default function WhatsAppButton({
       href={CONTACT.whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex min-h-[44px] items-center justify-center gap-2.5 rounded-xl bg-whatsapp font-semibold text-white shadow-sm transition-all duration-200 hover:bg-whatsapp-hover hover:shadow-md active:scale-[0.98] ${sizeClasses} ${className}`}
+      className={`group inline-flex min-h-[44px] items-center justify-center gap-2.5 rounded-xl bg-whatsapp font-semibold text-white shadow-sm transition-all duration-200 hover:bg-whatsapp-hover hover:shadow-md active:scale-[0.98] ${sizeClasses} ${className}`}
     >
-      <WhatsAppIcon className="h-5 w-5 shrink-0" />
+      <WhatsAppIcon className="h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
       {children}
     </a>
   );

@@ -29,18 +29,18 @@ export default function Contact() {
           <div className="mt-6 flex flex-col gap-3">
             <a
               href={`mailto:${CONTACT.email}`}
-              className="inline-flex items-center gap-2.5 text-sm text-muted transition-colors hover:text-ink"
+              className="group inline-flex items-center gap-2.5 text-sm text-muted transition-colors hover:text-ink"
             >
-              <MailIcon className="h-4 w-4 shrink-0" />
+              <MailIcon className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5" />
               {CONTACT.email}
             </a>
             <a
               href={CONTACT.linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 text-sm text-muted transition-colors hover:text-ink"
+              className="group inline-flex items-center gap-2.5 text-sm text-muted transition-colors hover:text-ink"
             >
-              <LinkedInIcon className="h-4 w-4 shrink-0" />
+              <LinkedInIcon className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5" />
               LinkedIn
             </a>
           </div>

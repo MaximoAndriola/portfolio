@@ -6,7 +6,9 @@ export default function BrowserFrame({
   className?: string;
 }) {
   return (
-    <div className={`overflow-hidden rounded-xl bg-surface shadow-lg ${className}`}>
+    <div
+      className={`group overflow-hidden rounded-xl bg-surface shadow-lg transition-shadow duration-300 md:hover:shadow-xl ${className}`}
+    >
       {/* Barra superior con puntitos decorativos, para que hasta el
           placeholder se lea intencional y no como una caja vacía. */}
       <div className="flex items-center gap-1.5 border-b border-bg px-4 py-3">

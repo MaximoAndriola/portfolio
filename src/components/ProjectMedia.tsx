@@ -19,9 +19,14 @@ export default function ProjectMedia({
 
   return (
     <BrowserFrame>
-      <div className="relative aspect-[16/10] w-full bg-bg">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-bg">
         {exists ? (
-          <Image src={src} alt={alt} fill className="object-cover" />
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-cover transition-transform duration-500 ease-out md:group-hover:scale-105"
+          />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-muted">
             <svg

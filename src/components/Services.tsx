@@ -65,9 +65,9 @@ export default function Services() {
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mt-14 lg:gap-6">
           {SERVICES.map((service, i) => (
             <Reveal key={service.title} delay={i * 80}>
-              <div className="h-full rounded-xl bg-surface p-8 shadow-sm transition-all duration-200 md:hover:-translate-y-0.5 md:hover:shadow-md">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10">
-                  <service.icon className="h-6 w-6 text-brand" />
+              <div className="group h-full rounded-xl bg-surface p-8 shadow-sm transition-all duration-200 md:hover:-translate-y-0.5 md:hover:shadow-md">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 transition-colors duration-200 md:group-hover:bg-brand/15">
+                  <service.icon className="h-6 w-6 text-brand transition-transform duration-200 md:group-hover:scale-110" />
                 </div>
                 <h3 className="mt-4 font-heading text-lg font-semibold text-ink">
                   {service.title}
@@ -92,8 +92,8 @@ export default function Services() {
           <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6 lg:gap-10">
             {STEPS.map((step, i) => (
               <Reveal key={step.n} delay={i * 80}>
-                <div className="flex items-start gap-4 sm:block">
-                  <span className="font-heading text-2xl font-semibold text-brand/30 sm:text-3xl">
+                <div className="group flex items-start gap-4 sm:block">
+                  <span className="font-heading text-2xl font-semibold text-brand/30 transition-colors duration-200 group-hover:text-brand/50 sm:text-3xl">
                     {step.n}
                   </span>
                   <div className="sm:mt-3">

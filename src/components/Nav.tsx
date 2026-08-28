@@ -33,14 +33,24 @@ export default function Nav() {
     >
       <Container>
         <nav className="flex items-center justify-between py-4">
-          <a href="#inicio" className="font-heading text-lg font-semibold text-ink">
-            Maximo<span className="text-brand">.</span>
+          <a
+            href="#inicio"
+            className="group font-heading text-lg font-semibold text-ink"
+          >
+            Maximo
+            <span className="text-brand transition-transform duration-300 inline-block group-hover:rotate-[20deg]">
+              .
+            </span>
           </a>
           <ul className="flex items-center gap-8 text-sm font-medium text-muted">
             {LINKS.map((link) => (
               <li key={link.href}>
-                <a href={link.href} className="transition-colors hover:text-ink">
+                <a
+                  href={link.href}
+                  className="group/link relative inline-block py-1 transition-colors hover:text-ink"
+                >
                   {link.label}
+                  <span className="absolute inset-x-0 -bottom-0.5 h-px scale-x-0 bg-brand transition-transform duration-200 ease-out group-hover/link:scale-x-100" />
                 </a>
               </li>
             ))}

@@ -69,4 +69,4 @@ para hacer el reclamo al banco.
 
 ## 5. Footer
 
-Maximo · Desarrollador de software · Mar del Plata, Argentina · 2026
+Maximo · Desarrollador de software · Mar del Plata, Buenos Aires, Argentina · 2026

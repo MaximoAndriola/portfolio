@@ -13,7 +13,7 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-1 text-center text-sm text-muted sm:flex-row sm:items-baseline sm:justify-between sm:text-left">
           <p>Maximo · Desarrollador de software</p>
           <p>
-            Mar del Plata, Argentina · {year}
+            Mar del Plata, Buenos Aires, Argentina · {year}
           </p>
         </div>
       </Container>

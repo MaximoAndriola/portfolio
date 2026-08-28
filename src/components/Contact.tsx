@@ -18,10 +18,13 @@ export default function Contact() {
             Contacto
           </p>
           <h2 className="mt-2 font-heading text-[1.75rem] leading-tight font-semibold text-ink sm:text-4xl">
-            ¿Tenés un proyecto en mente? Escribime.
+            Contame tu proyecto y te paso un presupuesto
           </h2>
+          <p className="mt-3 text-sm text-muted">
+            Sin compromiso. Te respondo a la brevedad.
+          </p>
 
-          <WhatsAppButton className="mt-8 w-full" />
+          <WhatsAppButton className="mt-6 w-full" />
 
           <div className="mt-6 flex flex-col gap-3">
             <a

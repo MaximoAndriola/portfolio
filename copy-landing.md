@@ -55,11 +55,13 @@ para hacer el reclamo al banco.
 
 ## 4. Contacto
 
-**Título:** ¿Tenés un proyecto en mente? Escribime.
+**Título:** Contame tu proyecto y te paso un presupuesto
 
-- 📱 WhatsApp: `+54 9 223 424-3399` *(personal, temporal — cambiar cuando saques número de empresa)*
-- ✉️ Mail: `maximoandriola2017@gmail.com` *(personal, temporal — cambiar cuando saques mail de empresa)*
-- 🔗 LinkedIn: `https://www.linkedin.com/in/maximo-andriola/`
+**Bajada:** Sin compromiso. Te respondo a la brevedad.
+
+- WhatsApp: `+54 9 223 424-3399` *(personal, temporal — cambiar cuando saques número de empresa)*
+- Mail: `maximoandriola2017@gmail.com` *(personal, temporal — cambiar cuando saques mail de empresa)*
+- LinkedIn: `https://www.linkedin.com/in/maximo-andriola/`
 
 **Botón repetido:** Escribime por WhatsApp
 

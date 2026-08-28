@@ -21,12 +21,9 @@ export default function Reveal({ children, className = "", delay = 0 }: RevealPr
     const node = ref.current;
     if (!node) return;
 
-    // Si el usuario prefiere menos movimiento, mostrar directo sin animar.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setVisible(true);
-      return;
-    }
-
+    // No hace falta chequear prefers-reduced-motion acá: la regla global en
+    // globals.css ya lleva duration a ~0, así que igual revela al entrar en
+    // viewport pero sin la animación de movimiento.
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

@@ -10,7 +10,7 @@ import Reveal from "@/components/ui/Reveal";
  */
 export default function About() {
   return (
-    <section id="sobre-mi" className="bg-surface py-16 lg:py-28">
+    <section id="sobre-mi" className="bg-surface bg-dot-grid py-16 lg:py-28">
       <Container>
         <Reveal>
           <p className="text-[0.8125rem] font-semibold uppercase tracking-wider text-muted">

@@ -35,6 +35,21 @@ body {
   color: var(--color-ink);
 }
 
+/* Textura de fondo sutil (dot-grid). Se aplica por sección en vez de en
+   body: cada sección ya pinta su propio color sólido para alternar
+   blanco/gris, así que un fondo puesto solo en body quedaría tapado.
+   background-attachment: fixed mantiene la grilla de puntos alineada y
+   continua entre secciones al scrollear, como si fuera una sola textura. */
+.bg-dot-grid {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-brand) 6%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  background-attachment: fixed;
+}
+
 /* Foco visible consistente en todos los elementos interactivos. */
 a:focus-visible,
 button:focus-visible {

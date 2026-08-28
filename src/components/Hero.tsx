@@ -9,7 +9,7 @@ import { ArrowDownIcon, ClockIcon } from "@/components/icons";
  */
 export default function Hero() {
   return (
-    <section className="bg-surface pb-16 pt-20 sm:pt-24 lg:pb-32 lg:pt-32">
+    <section className="bg-surface bg-dot-grid pb-16 pt-20 sm:pt-24 lg:pb-32 lg:pt-32">
       <Container>
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[60%_40%] lg:gap-8">
           <div>

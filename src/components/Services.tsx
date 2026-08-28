@@ -51,7 +51,7 @@ const STEPS = [
  */
 export default function Services() {
   return (
-    <section className="bg-bg py-16 lg:py-28">
+    <section className="bg-bg bg-dot-grid py-16 lg:py-28">
       <Container>
         <Reveal>
           <p className="text-[0.8125rem] font-semibold uppercase tracking-wider text-muted">

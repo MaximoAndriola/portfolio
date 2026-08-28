@@ -8,7 +8,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-surface py-8">
+    <footer className="bg-surface bg-dot-grid py-8">
       <Container>
         <div className="flex flex-col items-center gap-1 text-center text-sm text-muted sm:flex-row sm:items-baseline sm:justify-between sm:text-left">
           <p>Maximo · Desarrollador de software</p>

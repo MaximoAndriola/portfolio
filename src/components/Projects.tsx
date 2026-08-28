@@ -29,7 +29,7 @@ const PROJECTS = [
  */
 export default function Projects() {
   return (
-    <section id="proyectos" className="bg-surface py-16 lg:py-28">
+    <section id="proyectos" className="bg-surface bg-dot-grid py-16 lg:py-28">
       <Container>
         <Reveal>
           <p className="text-[0.8125rem] font-semibold uppercase tracking-wider text-muted">

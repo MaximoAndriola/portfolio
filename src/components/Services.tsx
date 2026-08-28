@@ -6,24 +6,22 @@ const SERVICES = [
   {
     icon: WebIcon,
     title: "Páginas web",
-    description: "Para que tu negocio aparezca en Google y tus clientes te encuentren.",
+    description: "Pensadas para convertir visitas en clientes, no solo para estar en internet.",
   },
   {
     icon: SystemIcon,
     title: "Sistemas a medida",
-    description:
-      "Para gestionar stock, ventas, turnos o lo que tu negocio necesite, sin depender de un cuaderno o un Excel.",
+    description: "Para dejar atrás el cuaderno y el Excel, y tener el control real de tu negocio.",
   },
   {
     icon: AutomationIcon,
     title: "Automatizaciones",
-    description: "Para tareas repetitivas que te hacen perder tiempo todos los días.",
+    description: "Para recuperar las horas que hoy perdés en tareas repetitivas.",
   },
   {
     icon: BoltIcon,
     title: "Entregas rápidas",
-    description:
-      "Gracias a herramientas de inteligencia artificial que uso en mi flujo de trabajo.",
+    description: "Gracias a inteligencia artificial en mi flujo de trabajo, sin resignar calidad.",
   },
 ];
 

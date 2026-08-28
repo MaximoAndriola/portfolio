@@ -22,14 +22,14 @@ con otro número. Mejor prometer de más y cumplir, que al revés.)*
 
 ## 2. Servicios
 
-- 🌐 **Páginas web** para que tu negocio aparezca en Google y tus clientes
-  te encuentren.
-- ⚙️ **Sistemas a medida** para gestionar stock, ventas, turnos o lo que
-  tu negocio necesite — sin depender de un cuaderno o un Excel.
-- 🔁 **Automatizaciones** para tareas repetitivas que te hacen perder
-  tiempo todos los días.
-- ⚡ **Entregas rápidas**, gracias a herramientas de inteligencia
-  artificial que uso en mi flujo de trabajo.
+- **Páginas web** — Pensadas para convertir visitas en clientes, no solo
+  para estar en internet.
+- **Sistemas a medida** — Para dejar atrás el cuaderno y el Excel, y tener
+  el control real de tu negocio.
+- **Automatizaciones** — Para recuperar las horas que hoy perdés en
+  tareas repetitivas.
+- **Entregas rápidas** — Gracias a inteligencia artificial en mi flujo de
+  trabajo, sin resignar calidad.
 
 ---
 

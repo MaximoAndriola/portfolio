@@ -1,6 +1,7 @@
 import Container from "@/components/ui/Container";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import DashboardIllustration from "@/components/DashboardIllustration";
+import HeroGlow from "@/components/HeroGlow";
 import { ArrowDownIcon, ClockIcon } from "@/components/icons";
 
 /**
@@ -9,7 +10,10 @@ import { ArrowDownIcon, ClockIcon } from "@/components/icons";
  */
 export default function Hero() {
   return (
-    <section className="bg-surface bg-dot-grid pb-16 pt-20 sm:pt-24 lg:pb-32 lg:pt-32">
+    <section
+      id="inicio"
+      className="relative overflow-hidden bg-surface bg-dot-grid pb-16 pt-20 sm:pt-24 lg:pb-32 lg:pt-32"
+    >
       <Container>
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[60%_40%] lg:gap-8">
           <div>
@@ -66,9 +70,10 @@ export default function Hero() {
           </div>
 
           <div
-            className="animate-fade-up"
+            className="animate-fade-up relative"
             style={{ animationDelay: "200ms" }}
           >
+            <HeroGlow />
             <DashboardIllustration />
           </div>
         </div>

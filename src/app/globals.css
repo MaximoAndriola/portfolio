@@ -60,6 +60,11 @@
   }
 }
 
+html {
+  /* Deja lugar para el nav sticky al navegar por anclas. */
+  scroll-padding-top: 5rem;
+}
+
 body {
   background: var(--color-bg);
   color: var(--color-ink);

@@ -20,13 +20,16 @@ export default function About() {
             Sobre mí
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            Soy desarrollador full-stack, vivo en Mar del Plata y me dedico a
-            construir software a medida: desde páginas web simples hasta
-            sistemas de gestión completos. Vengo del mundo del desarrollo de
-            sistemas complejos (trabajé en un ERP con varios módulos para una
-            empresa real), y hoy también estoy construyendo mi propio
-            producto, Prodizzi. Me gusta entender primero el problema real de
-            cada negocio antes de escribir una sola línea de código.
+            Soy desarrollador full-stack de Mar del Plata. Construyo software
+            a medida — desde páginas web hasta sistemas de gestión completos —
+            con una mirada que viene de haber trabajado también en la
+            administración y gestión de organizaciones. Esa combinación es la
+            que más valor le da a lo que hago: no solo escribo código,
+            entiendo cómo funciona un negocio por dentro antes de tocar una
+            línea, así el sistema que construyo se ajusta a cómo trabajás de
+            verdad, no al revés. Hoy además estoy construyendo mi propio
+            producto, Prodizzi, aplicando esa misma lógica: identificar un
+            problema real y resolverlo con tecnología.
           </p>
         </Reveal>
       </Container>

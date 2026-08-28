@@ -128,13 +128,16 @@ export function BoltIcon({ className = "w-6 h-6" }: IconProps) {
   );
 }
 
-export function ArrowDownIcon({ className = "w-4 h-4" }: IconProps) {
+export function ArrowDownIcon({
+  className = "w-4 h-4",
+  strokeWidth = "1.8",
+}: IconProps & { strokeWidth?: string | number }) {
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="1.8"
+      strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}

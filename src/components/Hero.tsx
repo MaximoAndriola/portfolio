@@ -42,10 +42,13 @@ export default function Hero() {
               <WhatsAppButton className="w-full sm:w-auto" />
               <a
                 href="#proyectos"
-                className="hidden items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-ink lg:inline-flex"
+                className="group hidden items-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-ink lg:inline-flex"
               >
                 Ver proyectos
-                <ArrowDownIcon />
+                <ArrowDownIcon
+                  className="h-[18px] w-[18px] transition-transform duration-200 group-hover:translate-y-0.5"
+                  strokeWidth="2.25"
+                />
               </a>
             </div>
           </div>

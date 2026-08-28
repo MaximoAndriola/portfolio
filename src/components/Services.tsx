@@ -34,12 +34,18 @@ const STEPS = [
   {
     n: "02",
     title: "Te paso una propuesta",
-    description: "Plazo y precio claro, antes de arrancar.",
+    description: "Alcance, plazo y precio claros, antes de arrancar.",
   },
   {
     n: "03",
     title: "Construyo y te mantengo al tanto",
-    description: "Vas viendo el avance real, no recién al final.",
+    description: "Vas viendo avances reales durante todo el proceso, no recién al final.",
+  },
+  {
+    n: "04",
+    title: "Te acompaño después de la entrega",
+    description:
+      "Ajustes, soporte y mantenimiento para que todo siga funcionando como el primer día.",
   },
 ];
 
@@ -87,7 +93,7 @@ export default function Services() {
             </h3>
           </Reveal>
 
-          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6 lg:gap-10">
+          <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-8">
             {STEPS.map((step, i) => (
               <Reveal key={step.n} delay={i * 80}>
                 <div className="group flex items-start gap-4 sm:block">

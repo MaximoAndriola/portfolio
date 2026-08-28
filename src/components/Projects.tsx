@@ -11,15 +11,10 @@ const CIVIL_CONTROL_ALT: Record<string, string> = {
     "Panel principal de módulos de Civil Control: personal, vehículos, taller, clientes e informes",
   "civil-control-2.png":
     "Centro de informes de Civil Control con reportes disponibles por categoría",
+  "civil-control-3.png":
+    "Reporte de egresos de Civil Control con montos y sectores anonimizados",
   "civil-control-4.png": "Configuración de roles y permisos por módulo en Civil Control",
 };
-
-// civil-control-3.png queda afuera a propósito: muestra un total sin
-// difuminar y una etiqueta de sector con pinta de nombre real de cliente
-// ("Particular Ricardo"). CLAUDE.md prohíbe datos reales de ESEA en
-// imágenes — no se sube ni se muestra hasta confirmar que es un dato de
-// ejemplo o se edita la captura.
-const CIVIL_CONTROL_EXCLUDED = ["civil-control-3.png"];
 
 const PROJECTS = [
   {
@@ -33,7 +28,6 @@ const PROJECTS = [
       prefix: "civil-control",
       label: "Civil Control",
       altByFile: CIVIL_CONTROL_ALT,
-      exclude: CIVIL_CONTROL_EXCLUDED,
     }),
     reversed: false,
   },

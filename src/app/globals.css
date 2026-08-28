@@ -61,6 +61,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   /* Deja lugar para el nav sticky al navegar por anclas. */
   scroll-padding-top: 5rem;
 }

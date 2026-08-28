@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import BrowserFrame from "@/components/ui/BrowserFrame";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/components/icons";
+import Lightbox from "@/components/Lightbox";
+import { ChevronLeftIcon, ChevronRightIcon, ExpandIcon } from "@/components/icons";
 import type { ProjectImage } from "@/lib/projectImages";
 
 const AUTOPLAY_MS = 4500;
@@ -25,6 +26,7 @@ const SWIPE_THRESHOLD_PX = 40;
 export default function ProjectCarousel({ images, title }: { images: ProjectImage[]; title: string }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   // Lazy initializer (no un efecto): esto no afecta nada del render/markup,
   // solo la condición del autoplay más abajo, así que no hay riesgo de
   // mismatch de hidratación entre server y cliente.
@@ -32,14 +34,16 @@ export default function ProjectCarousel({ images, title }: { images: ProjectImag
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );
   const touchStartX = useRef<number | null>(null);
+  // Evita que el click "fantasma" que sigue a un swipe abra el lightbox.
+  const justSwiped = useRef(false);
 
   const count = images.length;
 
   useEffect(() => {
-    if (count < 2 || paused || reducedMotion) return;
+    if (count < 2 || paused || reducedMotion || lightboxOpen) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % count), AUTOPLAY_MS);
     return () => clearInterval(id);
-  }, [count, paused, reducedMotion]);
+  }, [count, paused, reducedMotion, lightboxOpen]);
 
   if (count === 0) {
     return (
@@ -75,81 +79,112 @@ export default function ProjectCarousel({ images, title }: { images: ProjectImag
     if (touchStartX.current === null) return;
     const delta = e.changedTouches[0].clientX - touchStartX.current;
     if (Math.abs(delta) > SWIPE_THRESHOLD_PX) {
+      justSwiped.current = true;
       if (delta < 0) goNext();
       else goPrev();
     }
     touchStartX.current = null;
   };
 
+  const openLightbox = () => {
+    if (justSwiped.current) {
+      justSwiped.current = false;
+      return;
+    }
+    setLightboxOpen(true);
+  };
+
   return (
-    <BrowserFrame>
-      <div
-        className="relative aspect-[16/10] w-full overflow-hidden bg-bg"
-        style={{ touchAction: "pan-y" }}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-        role="region"
-        aria-roledescription="carrusel"
-        aria-label={`Capturas de ${title}`}
-      >
+    <>
+      <BrowserFrame>
         <div
-          className="flex h-full transition-transform duration-500 ease-out"
-          style={{ width: `${count * 100}%`, transform: `translateX(-${index * (100 / count)}%)` }}
+          className="relative aspect-[16/10] w-full overflow-hidden bg-bg"
+          style={{ touchAction: "pan-y" }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          role="region"
+          aria-roledescription="carrusel"
+          aria-label={`Capturas de ${title}`}
         >
-          {images.map((img) => (
-            <div key={img.src} className="relative h-full shrink-0" style={{ width: `${100 / count}%` }}>
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                priority={img === images[0]}
-                className="object-cover"
-              />
-            </div>
-          ))}
+          <div
+            className="flex h-full transition-transform duration-500 ease-out"
+            style={{ width: `${count * 100}%`, transform: `translateX(-${index * (100 / count)}%)` }}
+          >
+            {images.map((img) => (
+              <button
+                key={img.src}
+                type="button"
+                onClick={openLightbox}
+                aria-label={`Ampliar: ${img.alt}`}
+                className="group/slide relative h-full shrink-0 cursor-zoom-in"
+                style={{ width: `${100 / count}%` }}
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  priority={img === images[0]}
+                  className="object-cover"
+                />
+                <span className="absolute inset-0 bg-ink/0 transition-colors duration-200 group-hover/slide:bg-ink/10" />
+                <span className="absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-surface/90 text-ink opacity-0 shadow-sm transition-opacity duration-200 group-hover/slide:opacity-100">
+                  <ExpandIcon className="h-4 w-4" />
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {count > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={goPrev}
+                aria-label="Imagen anterior"
+                className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink opacity-70 shadow-sm transition-opacity duration-200 hover:bg-surface md:opacity-0 md:group-hover:opacity-100"
+              >
+                <ChevronLeftIcon className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={goNext}
+                aria-label="Imagen siguiente"
+                className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink opacity-70 shadow-sm transition-opacity duration-200 hover:bg-surface md:opacity-0 md:group-hover:opacity-100"
+              >
+                <ChevronRightIcon className="h-5 w-5" />
+              </button>
+            </>
+          )}
         </div>
 
         {count > 1 && (
-          <>
-            <button
-              type="button"
-              onClick={goPrev}
-              aria-label="Imagen anterior"
-              className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink opacity-70 shadow-sm transition-opacity duration-200 hover:bg-surface md:opacity-0 md:group-hover:opacity-100"
-            >
-              <ChevronLeftIcon className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              onClick={goNext}
-              aria-label="Imagen siguiente"
-              className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/90 text-ink opacity-70 shadow-sm transition-opacity duration-200 hover:bg-surface md:opacity-0 md:group-hover:opacity-100"
-            >
-              <ChevronRightIcon className="h-5 w-5" />
-            </button>
-          </>
+          <div className="flex items-center justify-center gap-2 border-t border-bg bg-surface py-3">
+            {images.map((img, i) => (
+              <button
+                key={img.src}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`Ver imagen ${i + 1} de ${count}`}
+                aria-current={i === index}
+                className={`h-1.5 rounded-full transition-all duration-200 ${
+                  i === index ? "w-5 bg-brand" : "w-1.5 bg-brand/25 hover:bg-brand/40"
+                }`}
+              />
+            ))}
+          </div>
         )}
-      </div>
+      </BrowserFrame>
 
-      {count > 1 && (
-        <div className="flex items-center justify-center gap-2 border-t border-bg bg-surface py-3">
-          {images.map((img, i) => (
-            <button
-              key={img.src}
-              type="button"
-              onClick={() => goTo(i)}
-              aria-label={`Ver imagen ${i + 1} de ${count}`}
-              aria-current={i === index}
-              className={`h-1.5 rounded-full transition-all duration-200 ${
-                i === index ? "w-5 bg-brand" : "w-1.5 bg-brand/25 hover:bg-brand/40"
-              }`}
-            />
-          ))}
-        </div>
+      {lightboxOpen && (
+        <Lightbox
+          images={images}
+          index={index}
+          onIndexChange={setIndex}
+          onClose={() => setLightboxOpen(false)}
+        />
       )}
-    </BrowserFrame>
+    </>
   );
 }

@@ -3,7 +3,7 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ProjectCarousel from "@/components/ProjectCarousel";
-import { ChevronLeftIcon } from "@/components/icons";
+import { ChevronLeftIcon, ClockIcon } from "@/components/icons";
 import type { CaseStudy } from "@/lib/caseStudies";
 
 /**
@@ -17,6 +17,15 @@ import type { CaseStudy } from "@/lib/caseStudies";
 export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy }) {
   const { title, tagline, images, problem, solution, roleAndProcess, impact, ctaLine } = caseStudy;
   const hasContent = Boolean(problem || solution || roleAndProcess);
+  const hasImpact = Boolean(impact.featured || impact.items.length > 0);
+
+  // Divide el dato destacado en el título grande (antes de la coma) y el
+  // detalle más chico (después) — mismo texto, solo separado por jerarquía.
+  const featuredCommaIdx = impact.featured.indexOf(",");
+  const featuredMain =
+    featuredCommaIdx === -1 ? impact.featured : impact.featured.slice(0, featuredCommaIdx);
+  const featuredRest =
+    featuredCommaIdx === -1 ? "" : impact.featured.slice(featuredCommaIdx + 1).trim();
 
   // El header ya usó bg-surface, así que la primera sección de contenido
   // alterna a bg-bg — pero solo cuenta lo que realmente se renderiza, para
@@ -90,7 +99,7 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy 
             </TextSection>
           )}
 
-          {impact.length > 0 && (
+          {hasImpact && (
             <section className={`${nextBg()} bg-dot-grid py-16 lg:py-24`}>
               <Container>
                 <Reveal>
@@ -101,12 +110,48 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy 
                     Impacto
                   </h2>
                 </Reveal>
-                <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
-                  {impact.map((stat, i) => (
-                    <Reveal key={stat} delay={i * 80}>
-                      <ImpactCard value={stat} />
+
+                {/* Bento asimétrico a propósito: una celda destacada grande y
+                    3 chicas con tratamiento distinto entre sí (número grande,
+                    número mediano, línea con ícono) — nada de 4 cajas iguales. */}
+                <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:gap-5">
+                  {impact.featured && (
+                    <Reveal className="sm:col-span-3">
+                      <div className="rounded-2xl bg-brand p-8 sm:p-10">
+                        <p className="font-heading text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-4xl">
+                          {featuredMain}
+                        </p>
+                        {featuredRest && (
+                          <p className="mt-2 max-w-xl text-base text-white/70 sm:text-lg">
+                            {featuredRest}
+                          </p>
+                        )}
+                      </div>
                     </Reveal>
-                  ))}
+                  )}
+
+                  {impact.items[0] && (
+                    <Reveal delay={80}>
+                      <ImpactNumberCard text={impact.items[0]} size="lg" />
+                    </Reveal>
+                  )}
+
+                  {impact.items[1] && (
+                    <Reveal delay={160}>
+                      <ImpactNumberCard text={impact.items[1]} size="md" />
+                    </Reveal>
+                  )}
+
+                  {impact.items[2] && (
+                    <Reveal delay={240}>
+                      <div className="flex h-full items-center gap-3 rounded-xl bg-surface p-6 shadow-sm">
+                        <ClockIcon className="h-5 w-5 shrink-0 text-brand/60" />
+                        <p className="text-sm font-semibold text-ink sm:text-base">
+                          {impact.items[2]}
+                        </p>
+                      </div>
+                    </Reveal>
+                  )}
                 </div>
               </Container>
             </section>
@@ -171,20 +216,21 @@ function TextSection({
   );
 }
 
-function ImpactCard({ value }: { value: string }) {
+function ImpactNumberCard({ text, size }: { text: string; size: "lg" | "md" }) {
   // Si el dato arranca con un número (ej. "~50 empleados gestionados"), se
   // separa para darle más peso visual — mismo texto, sin inventar nada.
-  const match = value.match(/^(~?\d+)\s+(.+)$/);
+  const match = text.match(/^(~?\d+)\s+(.+)$/);
+  const numberClass = size === "lg" ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl";
 
   return (
-    <div className="flex h-full flex-col justify-center rounded-xl bg-surface p-6 text-center shadow-sm sm:text-left">
+    <div className="flex h-full flex-col justify-center rounded-xl bg-surface p-6 shadow-sm">
       {match ? (
         <>
-          <p className="font-heading text-3xl font-semibold text-brand sm:text-4xl">{match[1]}</p>
+          <p className={`font-heading font-semibold text-brand ${numberClass}`}>{match[1]}</p>
           <p className="mt-1 text-sm text-muted sm:text-base">{match[2]}</p>
         </>
       ) : (
-        <p className="font-heading text-lg font-semibold text-ink sm:text-xl">{value}</p>
+        <p className="font-heading text-lg font-semibold text-ink sm:text-xl">{text}</p>
       )}
     </div>
   );

@@ -15,7 +15,8 @@ export type CaseStudy = {
   problem: string;
   solution: string;
   roleAndProcess: string;
-  impact: string[];
+  /** featured = la celda grande del bento; items = las 3 celdas chicas. */
+  impact: { featured: string; items: string[] };
   ctaLine: string;
   /** Si es false, el home no linkea a /proyectos/<slug> todavía. */
   hasFullCaseStudy: boolean;
@@ -53,12 +54,14 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Civil Control centraliza cada área de la empresa —personal, flota de vehículos, seguros, ventas y compras— como partes de un mismo sistema, no como planillas aisladas. Envía notificaciones automáticas por mail ante vencimientos próximos, y genera reportes detallados y sectorizados con unos pocos clicks, en lugar de horas de cálculo manual. Es un sistema multi-tenant, preparado para adaptarse a la operación de distintas empresas, no limitado al caso de una sola flota — en ESEA S.A. hoy gestiona alrededor de 50 empleados y 60 vehículos.",
     roleAndProcess:
       "El desarrollo arrancó en agosto de 2025. Empecé liderando el backend y la API, y con el tiempo tomé el desarrollo completo del proyecto de punta a punta. La primera versión estable se lanzó en abril de 2026, y desde entonces el sistema sigue recibiendo actualizaciones con nuevas funcionalidades.",
-    impact: [
-      "~50 empleados gestionados",
-      "~60 vehículos bajo control",
-      "Sistema multi-tenant",
-      "En producción desde abril 2026",
-    ],
+    impact: {
+      featured: "Sistema multi-tenant, preparado para adaptarse a distintas empresas",
+      items: [
+        "~50 empleados gestionados",
+        "~60 vehículos bajo control",
+        "En producción desde abril 2026",
+      ],
+    },
     ctaLine: "¿Necesitás algo parecido para tu negocio? Escribime.",
     hasFullCaseStudy: true,
   },
@@ -76,7 +79,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     problem: "",
     solution: "",
     roleAndProcess: "",
-    impact: [],
+    impact: { featured: "", items: [] },
     ctaLine: "¿Tenés un proyecto en mente? Escribime.",
     hasFullCaseStudy: false,
   },

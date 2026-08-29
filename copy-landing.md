@@ -35,7 +35,7 @@ con otro número. Mejor prometer de más y cumplir, que al revés.)*
 
 ## 3. Proyectos
 
-### Civil Control — Sistema de gestión para ESEA
+### Civil Control — Sistema de gestión para ESEA S.A.
 
 Sistema de gestión integral que la empresa usa a diario para manejar
 personal, flota de vehículos, seguros, ventas y compras — todo

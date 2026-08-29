@@ -18,7 +18,7 @@ escriban por WhatsApp.
 2. **Servicios**: 3-4 bullets de qué puedo hacer, en lenguaje de resultado
    para el negocio, no de tecnología (nada de "stack", "backend", "API" acá).
 3. **Proyectos** (dos bloques, mismo formato cada uno):
-   - Civil Control (ERP para ESEA)
+   - Civil Control (ERP para ESEA S.A.)
    - Prodizzi (proyecto propio)
 4. **Contacto**: WhatsApp (CTA repetido), mail, y LinkedIn como referencia
    secundaria — no como acción principal.
@@ -30,7 +30,7 @@ Cercano pero profesional. Frases cortas. Cero jerga técnica en el copy
 visible.
 
 ## Reglas estrictas
-- NUNCA usar datos reales de ESEA (nombres, montos, patentes, clientes) en
+- NUNCA usar datos reales de ESEA S.A. (nombres, montos, patentes, clientes) en
   ningún texto ni imagen. Las capturas de Civil Control ya vienen editadas
   o con datos de ejemplo — no generar ni sugerir contenido con datos reales.
 - El CTA principal en TODA la página es WhatsApp. LinkedIn y mail son

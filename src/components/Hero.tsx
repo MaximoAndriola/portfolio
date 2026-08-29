@@ -45,7 +45,7 @@ export default function Hero() {
               className="animate-fade-up mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
               style={{ animationDelay: "270ms" }}
             >
-              <WhatsAppButton className="w-full sm:w-auto" />
+              <WhatsAppButton location="hero" className="w-full sm:w-auto" />
               <a
                 href="#proyectos"
                 className="group hidden items-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-ink lg:inline-flex"

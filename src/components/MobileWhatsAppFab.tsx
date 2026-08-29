@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { track } from "@vercel/analytics";
 import { CONTACT } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/icons";
 
@@ -36,6 +37,7 @@ export default function MobileWhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escribime por WhatsApp"
+      onClick={() => track("whatsapp_click", { location: "fab-mobile" })}
       className={`fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lg transition-all duration-300 active:scale-90 md:hidden ${
         visible
           ? "translate-y-0 opacity-100"

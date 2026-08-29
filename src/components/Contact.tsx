@@ -24,7 +24,7 @@ export default function Contact() {
             Sin compromiso. Te respondo a la brevedad.
           </p>
 
-          <WhatsAppButton className="mt-6 w-full" />
+          <WhatsAppButton location="contacto" className="mt-6 w-full" />
 
           <div className="mt-6 flex flex-col gap-3">
             <a

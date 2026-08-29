@@ -27,6 +27,7 @@ const HOW_IT_WORKS_ICONS = [UploadFileIcon, ClassifyIcon, DuplicateIcon, ClaimRe
  */
 export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy }) {
   const {
+    slug,
     title,
     tagline,
     images,
@@ -267,7 +268,7 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy 
             <h2 className="font-heading text-[1.75rem] leading-tight font-semibold text-ink sm:text-4xl">
               {ctaLine}
             </h2>
-            <WhatsAppButton className="mt-6 w-full" />
+            <WhatsAppButton location={`case-study:${slug}`} className="mt-6 w-full" />
           </Reveal>
         </Container>
       </section>

@@ -17,10 +17,44 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+const TITLE = "Maximo Andriola — Desarrollo de software en Mar del Plata";
+const DESCRIPTION =
+  "Desarrollo páginas web y sistemas a medida para que tu negocio ahorre tiempo y deje de depender de planillas sueltas.";
+
+// Dominio propio todavía sin registrar (ver CLAUDE.md § "Dominio") — mientras
+// tanto se resuelve solo en Vercel (VERCEL_URL) o localhost en desarrollo,
+// así og:image/twitter:image quedan con una URL absoluta válida sin
+// hardcodear un dominio que todavía no existe.
+const SITE_URL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000";
+
 export const metadata: Metadata = {
-  title: "Maximo Andriola — Desarrollo de software en Mar del Plata",
-  description:
-    "Desarrollo páginas web y sistemas a medida para que tu negocio ahorre tiempo y deje de depender de planillas sueltas.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
+    siteName: "Maximo Andriola",
+    // Mismo sistema visual del hero: fondo con dot-grid, nombre, lema e
+    // ilustración abstracta simplificada. Ver public/og-image.png.
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Maximo Andriola — Transformo ineficiencias operativas en procesos escalables",
+      },
+    ],
+    locale: "es_AR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({

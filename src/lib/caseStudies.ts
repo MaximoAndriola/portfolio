@@ -14,6 +14,8 @@ export type CaseStudy = {
   /** Vacíos = todavía no hay case study completo (ver Prodizzi). */
   problem: string;
   solution: string;
+  /** Fila por fila del comparativo Antes/Después. Vacío = se salta la sección. */
+  beforeAfter: { before: string; after: string }[];
   roleAndProcess: string;
   /** featured = la celda grande del bento; items = las 3 celdas chicas. */
   impact: { featured: string; items: string[] };
@@ -52,6 +54,25 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Antes de Civil Control, ESEA S.A. gestionaba personal, vehículos, seguros, ventas y compras en múltiples hojas de Excel separadas entre sí, sin normalizar. Los vencimientos de seguros y documentación se controlaban con anotaciones a mano, sin ningún tipo de alerta automática. Armar un reporte de ganancias y pérdidas sectorizado por área implicaba horas de cálculo manual cada vez que se necesitaba.",
     solution:
       "Civil Control centraliza cada área de la empresa —personal, flota de vehículos, seguros, ventas y compras— como partes de un mismo sistema, no como planillas aisladas. Envía notificaciones automáticas por mail ante vencimientos próximos, y genera reportes detallados y sectorizados con unos pocos clicks, en lugar de horas de cálculo manual. Es un sistema multi-tenant, preparado para adaptarse a la operación de distintas empresas, no limitado al caso de una sola flota — en ESEA S.A. hoy gestiona alrededor de 50 empleados y 60 vehículos.",
+    beforeAfter: [
+      {
+        before: "Múltiples Excels desordenados y sin normalizar entre sí",
+        after:
+          "Un sistema único que conecta personal, flota, seguros, ventas y compras como una sola unidad",
+      },
+      {
+        before: "Vencimientos controlados a mano, sin ningún tipo de alerta",
+        after: "Notificaciones automáticas por mail antes de que algo venza",
+      },
+      {
+        before: "Horas de cálculo manual para armar un reporte de ganancias y pérdidas",
+        after: "Reportes sectorizados generados en segundos, con un par de clicks",
+      },
+      {
+        before: "Información dispersa, sin una vista completa de la empresa",
+        after: "Un solo lugar con visión real y centralizada de toda la operación",
+      },
+    ],
     roleAndProcess:
       "El desarrollo arrancó en agosto de 2025. Empecé liderando el backend y la API, y con el tiempo tomé el desarrollo completo del proyecto de punta a punta. La primera versión estable se lanzó en abril de 2026, y desde entonces el sistema sigue recibiendo actualizaciones con nuevas funcionalidades.",
     impact: {
@@ -78,6 +99,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     // Todavía sin case study completo — copy pendiente en un próximo prompt.
     problem: "",
     solution: "",
+    beforeAfter: [],
     roleAndProcess: "",
     impact: { featured: "", items: [] },
     ctaLine: "¿Tenés un proyecto en mente? Escribime.",

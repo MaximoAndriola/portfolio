@@ -3,7 +3,7 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ProjectCarousel from "@/components/ProjectCarousel";
-import { ChevronLeftIcon, ClockIcon } from "@/components/icons";
+import { ArrowDownIcon, ChevronLeftIcon, ClockIcon } from "@/components/icons";
 import type { CaseStudy } from "@/lib/caseStudies";
 
 /**
@@ -15,8 +15,9 @@ import type { CaseStudy } from "@/lib/caseStudies";
  * aviso simple en su lugar.
  */
 export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy }) {
-  const { title, tagline, images, problem, solution, roleAndProcess, impact, ctaLine } = caseStudy;
-  const hasContent = Boolean(problem || solution || roleAndProcess);
+  const { title, tagline, images, problem, solution, beforeAfter, roleAndProcess, impact, ctaLine } =
+    caseStudy;
+  const hasContent = Boolean(problem || solution || roleAndProcess || beforeAfter.length > 0);
   const hasImpact = Boolean(impact.featured || impact.items.length > 0);
 
   // Divide el dato destacado en el título grande (antes de la coma) y el
@@ -73,6 +74,37 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy 
             <TextSection bg={nextBg()} eyebrow="Ahora" title="La solución">
               {solution}
             </TextSection>
+          )}
+
+          {beforeAfter.length > 0 && (
+            <section className={`${nextBg()} bg-dot-grid py-16 lg:py-24`}>
+              <Container>
+                <Reveal>
+                  <p className="text-[0.8125rem] font-semibold uppercase tracking-wider text-muted">
+                    El cambio
+                  </p>
+                  <h2 className="mt-2 font-heading text-[1.75rem] leading-tight font-semibold text-ink sm:text-4xl lg:text-[2.5rem] lg:leading-[1.15]">
+                    Antes / Después
+                  </h2>
+                </Reveal>
+
+                <div className="mt-10 space-y-6 sm:space-y-8">
+                  {beforeAfter.map((row, i) => (
+                    <Reveal key={row.before} delay={i * 80}>
+                      <div className="flex flex-col gap-3 rounded-xl bg-surface p-6 shadow-sm sm:flex-row sm:items-center sm:gap-6 sm:p-7">
+                        <p className="text-base leading-relaxed text-muted sm:flex-1 sm:text-lg">
+                          {row.before}
+                        </p>
+                        <ArrowDownIcon className="h-5 w-5 shrink-0 text-brand/40 sm:-rotate-90" />
+                        <p className="text-base font-semibold leading-relaxed text-brand sm:flex-1 sm:text-lg">
+                          {row.after}
+                        </p>
+                      </div>
+                    </Reveal>
+                  ))}
+                </div>
+              </Container>
+            </section>
           )}
 
           {images.length > 0 && (

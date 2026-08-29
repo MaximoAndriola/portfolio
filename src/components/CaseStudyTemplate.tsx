@@ -3,7 +3,7 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ProjectCarousel from "@/components/ProjectCarousel";
-import { ArrowDownIcon, ChevronLeftIcon, ClockIcon } from "@/components/icons";
+import { ChevronLeftIcon, ClockIcon } from "@/components/icons";
 import type { CaseStudy } from "@/lib/caseStudies";
 
 /**
@@ -88,20 +88,35 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy 
                   </h2>
                 </Reveal>
 
-                <div className="mt-10 space-y-6 sm:space-y-8">
-                  {beforeAfter.map((row, i) => (
-                    <Reveal key={row.before} delay={i * 80}>
-                      <div className="flex flex-col gap-3 rounded-xl bg-surface p-6 shadow-sm sm:flex-row sm:items-center sm:gap-6 sm:p-7">
-                        <p className="text-base leading-relaxed text-muted sm:flex-1 sm:text-lg">
-                          {row.before}
-                        </p>
-                        <ArrowDownIcon className="h-5 w-5 shrink-0 text-brand/40 sm:-rotate-90" />
-                        <p className="text-base font-semibold leading-relaxed text-brand sm:flex-1 sm:text-lg">
-                          {row.after}
-                        </p>
+                {/* Díptico: el desorden se lee en la composición (tarjetas
+                    tiradas y rotadas vs. columna prolija), no con flechas
+                    repetidas entre cada ítem. */}
+                <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+                  <Reveal>
+                    <div className="rounded-2xl bg-bg p-8 lg:p-10">
+                      <p className="text-[0.8125rem] font-semibold uppercase tracking-wider text-muted">
+                        Antes
+                      </p>
+                      <div className="mt-10">
+                        {beforeAfter.map((row, i) => (
+                          <MessyCard key={row.before} text={row.before} index={i} />
+                        ))}
                       </div>
-                    </Reveal>
-                  ))}
+                    </div>
+                  </Reveal>
+
+                  <Reveal delay={120}>
+                    <div className="rounded-2xl bg-brand/[0.04] p-8 lg:p-10">
+                      <p className="text-[0.8125rem] font-semibold uppercase tracking-wider text-brand">
+                        Después
+                      </p>
+                      <div className="mt-10 flex flex-col gap-3">
+                        {beforeAfter.map((row) => (
+                          <TidyCard key={row.after} text={row.after} />
+                        ))}
+                      </div>
+                    </div>
+                  </Reveal>
                 </div>
               </Container>
             </section>
@@ -245,6 +260,52 @@ function TextSection({
         </Reveal>
       </Container>
     </section>
+  );
+}
+
+// Rotación/offset fijos por índice (no Math.random(): en un server component
+// eso rendiría distinto en server y cliente y rompería la hidratación).
+// Valores dentro de -6° a 8° como pide el spec.
+const MESSY_ROTATIONS = [-5, 7, -3, 6];
+const MESSY_OFFSETS_X = [4, -10, 12, -6];
+
+function MessyCard({ text, index }: { text: string; index: number }) {
+  const rotation = MESSY_ROTATIONS[index % MESSY_ROTATIONS.length];
+  const offsetX = MESSY_OFFSETS_X[index % MESSY_OFFSETS_X.length];
+
+  return (
+    <div
+      className="relative w-[70%] max-w-[240px] rounded-lg bg-surface p-3.5 shadow-md"
+      style={{
+        transform: `rotate(${rotation}deg) translateX(${offsetX}px)`,
+        marginTop: index === 0 ? 0 : "-1.25rem",
+        zIndex: index + 1,
+      }}
+    >
+      {/* Label arriba (no abajo): la tarjeta siguiente tapa el borde
+          inferior de esta al solaparse, así que lo que se pisa son las
+          líneas decorativas, nunca el texto legible. */}
+      <p className="text-xs font-medium text-muted">{text}</p>
+      {/* Mini "filas de datos" — mismo motivo que la ilustración del hero. */}
+      <div className="mt-2.5 space-y-1.5">
+        <div className="h-1.5 w-full rounded-full bg-bg" />
+        <div className="h-1.5 w-4/5 rounded-full bg-bg" />
+        <div className="h-1.5 w-3/5 rounded-full bg-bg" />
+      </div>
+    </div>
+  );
+}
+
+function TidyCard({ text }: { text: string }) {
+  return (
+    <div className="rounded-lg border border-brand/25 bg-surface p-3.5 shadow-sm">
+      <div className="space-y-1.5">
+        <div className="h-1.5 w-full rounded-full bg-brand/15" />
+        <div className="h-1.5 w-4/5 rounded-full bg-brand/15" />
+        <div className="h-1.5 w-3/5 rounded-full bg-brand/15" />
+      </div>
+      <p className="mt-2.5 text-xs font-semibold text-brand">{text}</p>
+    </div>
   );
 }
 

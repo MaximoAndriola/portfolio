@@ -54,24 +54,13 @@ export const CASE_STUDIES: CaseStudy[] = [
       "Antes de Civil Control, ESEA S.A. gestionaba personal, vehículos, seguros, ventas y compras en múltiples hojas de Excel separadas entre sí, sin normalizar. Los vencimientos de seguros y documentación se controlaban con anotaciones a mano, sin ningún tipo de alerta automática. Armar un reporte de ganancias y pérdidas sectorizado por área implicaba horas de cálculo manual cada vez que se necesitaba.",
     solution:
       "Civil Control centraliza cada área de la empresa —personal, flota de vehículos, seguros, ventas y compras— como partes de un mismo sistema, no como planillas aisladas. Envía notificaciones automáticas por mail ante vencimientos próximos, y genera reportes detallados y sectorizados con unos pocos clicks, en lugar de horas de cálculo manual. Es un sistema multi-tenant, preparado para adaptarse a la operación de distintas empresas, no limitado al caso de una sola flota — en ESEA S.A. hoy gestiona alrededor de 50 empleados y 60 vehículos.",
+    // Textos cortos a propósito: van dentro de tarjetitas chicas en el
+    // díptico Antes/Después, no en filas de oración completa.
     beforeAfter: [
-      {
-        before: "Múltiples Excels desordenados y sin normalizar entre sí",
-        after:
-          "Un sistema único que conecta personal, flota, seguros, ventas y compras como una sola unidad",
-      },
-      {
-        before: "Vencimientos controlados a mano, sin ningún tipo de alerta",
-        after: "Notificaciones automáticas por mail antes de que algo venza",
-      },
-      {
-        before: "Horas de cálculo manual para armar un reporte de ganancias y pérdidas",
-        after: "Reportes sectorizados generados en segundos, con un par de clicks",
-      },
-      {
-        before: "Información dispersa, sin una vista completa de la empresa",
-        after: "Un solo lugar con visión real y centralizada de toda la operación",
-      },
+      { before: "Excels sin normalizar", after: "Sistema único y centralizado" },
+      { before: "Vencimientos a mano, sin alertas", after: "Notificaciones automáticas por mail" },
+      { before: "Horas de cálculo manual", after: "Reportes en segundos" },
+      { before: "Información dispersa", after: "Visión completa del negocio" },
     ],
     roleAndProcess:
       "El desarrollo arrancó en agosto de 2025. Empecé liderando el backend y la API, y con el tiempo tomé el desarrollo completo del proyecto de punta a punta. La primera versión estable se lanzó en abril de 2026, y desde entonces el sistema sigue recibiendo actualizaciones con nuevas funcionalidades.",

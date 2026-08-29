@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import MobileWhatsAppFab from "@/components/MobileWhatsAppFab";
 
 // Tipografía — ver CLAUDE.md § "Tipografía y escala".
 const spaceGrotesk = Space_Grotesk({
@@ -28,7 +31,15 @@ export default function RootLayout({
       lang="es-AR"
       className={`${spaceGrotesk.variable} ${inter.variable}`}
     >
-      <body className="font-body antialiased">{children}</body>
+      <body className="font-body antialiased">
+        {/* Nav, footer y el FAB de WhatsApp viven acá (no en cada page) para
+            que se compartan entre el home y las páginas de caso de estudio
+            en /proyectos/[slug]. */}
+        <Nav />
+        {children}
+        <Footer />
+        <MobileWhatsAppFab />
+      </body>
     </html>
   );
 }

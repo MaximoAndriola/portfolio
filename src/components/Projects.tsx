@@ -1,50 +1,17 @@
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import ProjectCarousel from "@/components/ProjectCarousel";
-import { getProjectImages } from "@/lib/projectImages";
-
-// Alt a medida para las capturas que ya sé qué muestran. Cualquier archivo
-// nuevo que no esté acá (civil-control-5.png, etc.) sigue apareciendo en el
-// carrusel igual, solo que con un alt genérico de fallback.
-const CIVIL_CONTROL_ALT: Record<string, string> = {
-  "civil-control-1.png":
-    "Panel principal de módulos de Civil Control: personal, vehículos, taller, clientes e informes",
-  "civil-control-2.png":
-    "Centro de informes de Civil Control con reportes disponibles por categoría",
-  "civil-control-3.png":
-    "Reporte de egresos de Civil Control con montos y sectores anonimizados",
-  "civil-control-4.png": "Configuración de roles y permisos por módulo en Civil Control",
-};
-
-const PROJECTS = [
-  {
-    title: "Civil Control",
-    subtitle: "Sistema de gestión para ESEA",
-    description:
-      "Sistema de gestión integral que la empresa usa a diario para manejar personal, flota de vehículos, seguros, ventas y compras, todo centralizado, sin planillas sueltas.",
-    note: "Capturas con datos de ejemplo por confidencialidad del cliente",
-    images: getProjectImages({
-      folder: "civil-control",
-      prefix: "civil-control",
-      label: "Civil Control",
-      altByFile: CIVIL_CONTROL_ALT,
-    }),
-    reversed: false,
-  },
-  {
-    title: "Prodizzi",
-    subtitle: "Mi proyecto propio",
-    description:
-      "Una app que analiza tus resúmenes bancarios y detecta automáticamente cobros duplicados o movimientos sospechosos, y te arma el texto listo para hacer el reclamo al banco.",
-    note: "Capturas propias, acá podés mostrar todo lo que quieras",
-    images: getProjectImages({ folder: "prodizzi", prefix: "prodizzi", label: "Prodizzi" }),
-    reversed: true,
-  },
-];
+import { ArrowDownIcon } from "@/components/icons";
+import { CASE_STUDIES } from "@/lib/caseStudies";
 
 /**
  * Proyectos — mobile imagen arriba + texto abajo; desktop zigzag para que
  * cada caso se lea distinto. Ver CLAUDE.md § "Proyectos — layout específico".
+ *
+ * Usa la misma fuente de datos que /proyectos/[slug] (src/lib/caseStudies)
+ * para no duplicar título, imágenes ni copy entre el teaser del home y la
+ * página de caso de estudio completa.
  */
 export default function Projects() {
   return (
@@ -60,8 +27,8 @@ export default function Projects() {
         </Reveal>
 
         <div className="mt-10 flex flex-col gap-16 lg:mt-14 lg:gap-24">
-          {PROJECTS.map((project) => (
-            <Reveal key={project.title}>
+          {CASE_STUDIES.map((project) => (
+            <Reveal key={project.slug}>
               <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
                 <div className={project.reversed ? "lg:order-2" : ""}>
                   <ProjectCarousel images={project.images} title={project.title} />
@@ -70,11 +37,24 @@ export default function Projects() {
                   <h3 className="font-heading text-2xl font-semibold text-ink sm:text-3xl">
                     {project.title}
                   </h3>
-                  <p className="mt-1 text-sm font-medium text-brand">{project.subtitle}</p>
+                  <p className="mt-1 text-sm font-medium text-brand">{project.homeSubtitle}</p>
                   <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
-                    {project.description}
+                    {project.homeDescription}
                   </p>
-                  <p className="mt-4 text-sm italic text-muted/80">({project.note})</p>
+                  <p className="mt-4 text-sm italic text-muted/80">({project.homeNote})</p>
+
+                  {project.hasFullCaseStudy && (
+                    <Link
+                      href={`/proyectos/${project.slug}`}
+                      className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-colors hover:text-ink"
+                    >
+                      Ver caso completo
+                      <ArrowDownIcon
+                        className="h-4 w-4 -rotate-90 transition-transform duration-200 group-hover:translate-x-0.5"
+                        strokeWidth="2.25"
+                      />
+                    </Link>
+                  )}
                 </div>
               </div>
             </Reveal>

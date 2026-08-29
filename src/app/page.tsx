@@ -1,25 +1,17 @@
-import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import MobileWhatsAppFab from "@/components/MobileWhatsAppFab";
 
 export default function Home() {
   return (
-    <>
-      <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Projects />
-        <Contact />
-      </main>
-      <Footer />
-      <MobileWhatsAppFab />
-    </>
+    <main>
+      <Hero />
+      <About />
+      <Services />
+      <Projects />
+      <Contact />
+    </main>
   );
 }

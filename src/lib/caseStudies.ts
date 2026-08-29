@@ -80,7 +80,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       items: [
         "~50 empleados gestionados",
         "~60 vehículos bajo control",
-        "En producción desde abril 2026",
+        "En uso activo desde abril 2026",
       ],
     },
     ctaLine: "¿Necesitás algo parecido para tu negocio? Escribime.",

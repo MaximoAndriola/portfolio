@@ -3,7 +3,7 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ProjectCarousel from "@/components/ProjectCarousel";
-import { ChevronLeftIcon, ClockIcon } from "@/components/icons";
+import { ChevronLeftIcon } from "@/components/icons";
 import type { CaseStudy } from "@/lib/caseStudies";
 
 /**
@@ -18,15 +18,7 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy 
   const { title, tagline, images, problem, solution, beforeAfter, roleAndProcess, impact, ctaLine } =
     caseStudy;
   const hasContent = Boolean(problem || solution || roleAndProcess || beforeAfter.length > 0);
-  const hasImpact = Boolean(impact.featured || impact.items.length > 0);
-
-  // Divide el dato destacado en el título grande (antes de la coma) y el
-  // detalle más chico (después) — mismo texto, solo separado por jerarquía.
-  const featuredCommaIdx = impact.featured.indexOf(",");
-  const featuredMain =
-    featuredCommaIdx === -1 ? impact.featured : impact.featured.slice(0, featuredCommaIdx);
-  const featuredRest =
-    featuredCommaIdx === -1 ? "" : impact.featured.slice(featuredCommaIdx + 1).trim();
+  const hasImpact = Boolean(impact.headline || impact.stats.length > 0);
 
   // El header ya usó bg-surface, así que la primera sección de contenido
   // alterna a bg-bg — pero solo cuenta lo que realmente se renderiza, para
@@ -158,44 +150,33 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy 
                   </h2>
                 </Reveal>
 
-                {/* Bento asimétrico a propósito: una celda destacada grande y
-                    3 chicas con tratamiento distinto entre sí (número grande,
-                    número mediano, línea con ícono) — nada de 4 cajas iguales. */}
-                <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3 lg:gap-5">
-                  {impact.featured && (
-                    <Reveal className="sm:col-span-3">
-                      <div className="rounded-2xl bg-brand p-8 sm:p-10">
-                        <p className="font-heading text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-4xl">
-                          {featuredMain}
+                {/* Editorial, no cards: columna de texto grande + riel de
+                    números con una sola línea de guía continua. */}
+                <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[60%_40%] lg:gap-12">
+                  {impact.headline && (
+                    <Reveal>
+                      <p className="max-w-xl font-heading text-2xl font-semibold leading-tight text-ink sm:text-3xl lg:text-[2.5rem] lg:leading-[1.15]">
+                        {impact.headline}
+                      </p>
+                      {impact.subline && (
+                        <p className="mt-4 max-w-md text-base leading-relaxed text-muted sm:text-lg">
+                          {impact.subline}
                         </p>
-                        {featuredRest && (
-                          <p className="mt-2 max-w-xl text-base text-white/70 sm:text-lg">
-                            {featuredRest}
-                          </p>
-                        )}
-                      </div>
+                      )}
                     </Reveal>
                   )}
 
-                  {impact.items[0] && (
-                    <Reveal delay={80}>
-                      <ImpactNumberCard text={impact.items[0]} size="lg" />
-                    </Reveal>
-                  )}
-
-                  {impact.items[1] && (
-                    <Reveal delay={160}>
-                      <ImpactNumberCard text={impact.items[1]} size="md" />
-                    </Reveal>
-                  )}
-
-                  {impact.items[2] && (
-                    <Reveal delay={240}>
-                      <div className="flex h-full items-center gap-3 rounded-xl bg-surface p-6 shadow-sm">
-                        <ClockIcon className="h-5 w-5 shrink-0 text-brand/60" />
-                        <p className="text-sm font-semibold text-ink sm:text-base">
-                          {impact.items[2]}
-                        </p>
+                  {impact.stats.length > 0 && (
+                    <Reveal delay={120}>
+                      <div className="flex flex-col border-l border-brand/20 pl-6 sm:pl-8">
+                        {impact.stats.map((stat, i) => (
+                          <div key={stat.label} className={i > 0 ? "mt-8" : ""}>
+                            <p className="font-heading text-4xl font-semibold text-brand sm:text-5xl">
+                              {stat.value}
+                            </p>
+                            <p className="mt-1 text-sm text-muted sm:text-base">{stat.label}</p>
+                          </div>
+                        ))}
                       </div>
                     </Reveal>
                   )}
@@ -309,22 +290,3 @@ function TidyCard({ text }: { text: string }) {
   );
 }
 
-function ImpactNumberCard({ text, size }: { text: string; size: "lg" | "md" }) {
-  // Si el dato arranca con un número (ej. "~50 empleados gestionados"), se
-  // separa para darle más peso visual — mismo texto, sin inventar nada.
-  const match = text.match(/^(~?\d+)\s+(.+)$/);
-  const numberClass = size === "lg" ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl";
-
-  return (
-    <div className="flex h-full flex-col justify-center rounded-xl bg-surface p-6 shadow-sm">
-      {match ? (
-        <>
-          <p className={`font-heading font-semibold text-brand ${numberClass}`}>{match[1]}</p>
-          <p className="mt-1 text-sm text-muted sm:text-base">{match[2]}</p>
-        </>
-      ) : (
-        <p className="font-heading text-lg font-semibold text-ink sm:text-xl">{text}</p>
-      )}
-    </div>
-  );
-}

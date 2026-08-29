@@ -17,8 +17,8 @@ export type CaseStudy = {
   /** Fila por fila del comparativo Antes/Después. Vacío = se salta la sección. */
   beforeAfter: { before: string; after: string }[];
   roleAndProcess: string;
-  /** featured = la celda grande del bento; items = las 3 celdas chicas. */
-  impact: { featured: string; items: string[] };
+  /** headline/subline = columna editorial grande; stats = riel de números. */
+  impact: { headline: string; subline: string; stats: { value: string; label: string }[] };
   ctaLine: string;
   /** Si es false, el home no linkea a /proyectos/<slug> todavía. */
   hasFullCaseStudy: boolean;
@@ -65,11 +65,13 @@ export const CASE_STUDIES: CaseStudy[] = [
     roleAndProcess:
       "El desarrollo arrancó en agosto de 2025. Empecé liderando el backend y la API, y con el tiempo tomé el desarrollo completo del proyecto de punta a punta. La primera versión estable se lanzó en abril de 2026, y desde entonces el sistema sigue recibiendo actualizaciones con nuevas funcionalidades.",
     impact: {
-      featured: "Sistema multi-tenant, preparado para adaptarse a distintas empresas",
-      items: [
-        "~50 empleados gestionados",
-        "~60 vehículos bajo control",
-        "En uso activo desde abril 2026",
+      headline: "Un sistema, listo para escalar a cualquier empresa",
+      subline:
+        "Es multi-tenant: no depende de la operación de una sola flota, está preparado para adaptarse a cómo trabaja cada empresa.",
+      stats: [
+        { value: "~50", label: "empleados" },
+        { value: "~60", label: "vehículos" },
+        { value: "Abril 2026", label: "en uso activo" },
       ],
     },
     ctaLine: "¿Necesitás algo parecido para tu negocio? Escribime.",
@@ -92,7 +94,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     solution: "",
     beforeAfter: [],
     roleAndProcess: "",
-    impact: { featured: "", items: [] },
+    impact: { headline: "", subline: "", stats: [] },
     ctaLine: "¿Tenés un proyecto en mente? Escribime.",
     hasFullCaseStudy: false,
   },

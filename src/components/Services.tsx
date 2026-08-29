@@ -49,9 +49,18 @@ const STEPS = [
   },
 ];
 
+// "Sistemas a medida" es el servicio de mayor valor/complejidad — se separa
+// del resto para llevar más espacio y jerarquía tipográfica, en vez de
+// quedar como una tarjeta más entre cuatro iguales.
+const FEATURED_SERVICE = SERVICES.find((s) => s.title === "Sistemas a medida")!;
+const OTHER_SERVICES = SERVICES.filter((s) => s !== FEATURED_SERVICE);
+
 /**
- * Servicios — mobile 1 columna, desktop grid 2x2.
- * Ver CLAUDE.md § "Servicios — layout específico".
+ * Servicios — mismo criterio editorial que "Impacto" en el caso de estudio
+ * de Civil Control: nada de grid de cards parejas. Un servicio destacado
+ * con más peso visual (card grande) + el resto como lista editorial
+ * compacta sobre un riel (border-l), sin cajas. Ver
+ * CLAUDE.md § "Servicios — layout específico".
  */
 export default function Services() {
   return (
@@ -66,22 +75,38 @@ export default function Services() {
           </h2>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:mt-14 lg:gap-6">
-          {SERVICES.map((service, i) => (
-            <Reveal key={service.title} delay={i * 80}>
-              <div className="group h-full rounded-xl bg-surface p-8 shadow-sm transition-all duration-200 md:hover:-translate-y-0.5 md:hover:shadow-md">
-                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 transition-colors duration-200 md:group-hover:bg-brand/15">
-                  <service.icon className="h-6 w-6 text-brand transition-transform duration-200 md:group-hover:scale-110" />
-                </div>
-                <h3 className="mt-4 font-heading text-lg font-semibold text-ink">
-                  {service.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">
-                  {service.description}
-                </p>
+        <div className="mt-10 grid grid-cols-1 gap-10 lg:mt-14 lg:grid-cols-[60%_40%] lg:gap-12">
+          <Reveal>
+            <div className="group h-full rounded-2xl bg-surface p-8 shadow-sm transition-all duration-200 sm:p-10 md:hover:-translate-y-0.5 md:hover:shadow-md">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-brand/10 transition-colors duration-200 md:group-hover:bg-brand/15">
+                <FEATURED_SERVICE.icon className="h-7 w-7 text-brand transition-transform duration-200 md:group-hover:scale-110" />
               </div>
-            </Reveal>
-          ))}
+              <h3 className="mt-6 font-heading text-2xl font-semibold text-ink sm:text-3xl lg:text-[2.25rem] lg:leading-[1.15]">
+                {FEATURED_SERVICE.title}
+              </h3>
+              <p className="mt-3 max-w-md text-base leading-relaxed text-muted sm:text-lg">
+                {FEATURED_SERVICE.description}
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={120}>
+            <div className="flex flex-col border-l border-brand/20 pl-6 sm:pl-8">
+              {OTHER_SERVICES.map((service, i) => (
+                <div key={service.title} className={i > 0 ? "mt-8" : ""}>
+                  <div className="flex items-center gap-3">
+                    <service.icon className="h-5 w-5 shrink-0 text-brand/70" />
+                    <h4 className="font-heading text-base font-semibold text-ink sm:text-lg">
+                      {service.title}
+                    </h4>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">
+                    {service.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
 
         {/* Mini-proceso "Cómo trabajo" — sin tarjetas, para que se lea como

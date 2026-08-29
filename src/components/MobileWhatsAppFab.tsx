@@ -8,6 +8,9 @@ import { WhatsAppIcon } from "@/components/icons";
 /**
  * Botón flotante de WhatsApp, solo mobile (<768px), aparece después de
  * scrollear más allá del hero.
+ *
+ * Ícono en text-ink, no blanco — mismo motivo que WhatsAppButton: blanco
+ * sobre #25D366 no llega al contraste mínimo de WCAG AA.
  */
 export default function MobileWhatsAppFab() {
   const [visible, setVisible] = useState(false);
@@ -38,7 +41,7 @@ export default function MobileWhatsAppFab() {
       rel="noopener noreferrer"
       aria-label="Escribime por WhatsApp"
       onClick={() => track("whatsapp_click", { location: "fab-mobile" })}
-      className={`fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lg transition-all duration-300 active:scale-90 md:hidden ${
+      className={`fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-ink shadow-lg transition-all duration-300 active:scale-90 md:hidden ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"

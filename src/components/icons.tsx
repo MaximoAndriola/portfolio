@@ -214,6 +214,88 @@ export function ChevronRightIcon({ className = "w-5 h-5" }: IconProps) {
   );
 }
 
+// Set de íconos para el paso a paso de "Cómo funciona" de Prodizzi — mismo
+// trazo fino (strokeWidth 1.5, sin relleno) que el resto del set, uno por
+// cada uno de los 4 pasos.
+
+export function UploadFileIcon({ className = "w-6 h-6" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 16V4" />
+      <path d="m7 9 5-5 5 5" />
+      <path d="M4 19h16" />
+    </svg>
+  );
+}
+
+export function ClassifyIcon({ className = "w-6 h-6" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="3.5" y="5" width="3" height="3" rx="0.5" />
+      <path d="M9 6.5h11.5" />
+      <rect x="3.5" y="10.5" width="3" height="3" rx="0.5" />
+      <path d="M9 12h11.5" />
+      <rect x="3.5" y="16" width="3" height="3" rx="0.5" />
+      <path d="M9 17.5h11.5" />
+    </svg>
+  );
+}
+
+export function DuplicateIcon({ className = "w-6 h-6" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="8" y="8" width="12" height="12" rx="2" />
+      <path d="M4 16V6a2 2 0 0 1 2-2h10" />
+    </svg>
+  );
+}
+
+export function ClaimReadyIcon({ className = "w-6 h-6" }: IconProps) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <rect x="4" y="3" width="16" height="18" rx="2" />
+      <path d="M8 8h8M8 12h5" />
+      <path d="m8.5 16 2 2 4-4" />
+    </svg>
+  );
+}
+
 export function ArrowDownIcon({
   className = "w-4 h-4",
   strokeWidth = "1.8",

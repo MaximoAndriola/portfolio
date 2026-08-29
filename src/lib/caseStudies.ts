@@ -16,6 +16,12 @@ export type CaseStudy = {
   solution: string;
   /** Fila por fila del comparativo Antes/Después. Vacío = se salta la sección. */
   beforeAfter: { before: string; after: string }[];
+  /**
+   * Pasos numerados de "Cómo funciona". Vacío = se salta la sección — solo
+   * la usan proyectos donde tiene sentido explicar un flujo paso a paso
+   * (por ahora, Prodizzi; Civil Control no la lleva).
+   */
+  howItWorks: string[];
   roleAndProcess: string;
   /** headline/subline = columna editorial grande; stats = riel de números. */
   impact: { headline: string; subline: string; stats: { value: string; label: string }[] };
@@ -62,6 +68,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { before: "Horas de cálculo manual", after: "Reportes en segundos" },
       { before: "Información dispersa", after: "Visión completa del negocio" },
     ],
+    howItWorks: [],
     roleAndProcess:
       "El desarrollo arrancó en agosto de 2025. Empecé liderando el backend y la API, y con el tiempo tomé el desarrollo completo del proyecto de punta a punta. La primera versión estable se lanzó en abril de 2026, y desde entonces el sistema sigue recibiendo actualizaciones con nuevas funcionalidades.",
     impact: {
@@ -80,7 +87,7 @@ export const CASE_STUDIES: CaseStudy[] = [
   {
     slug: "prodizzi",
     title: "Prodizzi",
-    tagline: "Mi proyecto propio",
+    tagline: "Detección automática de cobros duplicados y errores en resúmenes bancarios",
     homeSubtitle: "Mi proyecto propio",
     homeDescription:
       "Una app que analiza tus resúmenes bancarios y detecta automáticamente cobros duplicados o movimientos sospechosos, y te arma el texto listo para hacer el reclamo al banco.",
@@ -89,14 +96,36 @@ export const CASE_STUDIES: CaseStudy[] = [
     homeNote: "",
     reversed: true,
     images: getProjectImages({ folder: "prodizzi", prefix: "prodizzi", label: "Prodizzi" }),
-    // Todavía sin case study completo — copy pendiente en un próximo prompt.
-    problem: "",
-    solution: "",
+    problem:
+      "La idea de Prodizzi nació de un caso concreto: en mi propio resumen bancario apareció un cobro duplicado por una entrada de cine, que el sistema que estaba desarrollando reconoció automáticamente. Ese momento fue el que me confirmó que no era solo una idea interesante — era una herramienta realmente útil, porque ese tipo de error pasa desapercibido todo el tiempo cuando se revisa un resumen a simple vista.",
+    solution:
+      "Prodizzi analiza resúmenes bancarios en PDF de bancos y billeteras argentinas (Brubank, Mercado Pago, Cuenta DNI/Banco Provincia), detecta automáticamente cobros duplicados y movimientos sospechosos, y genera el texto del reclamo listo para enviar — vos decidís cuándo y cómo mandarlo, el sistema nunca actúa por su cuenta.",
+    // Prodizzi es un proyecto propio, en desarrollo activo, sin cliente ni
+    // "antes" corporativo que comparar — por eso no lleva el díptico
+    // Antes/Después que sí tiene Civil Control.
     beforeAfter: [],
-    roleAndProcess: "",
-    impact: { headline: "", subline: "", stats: [] },
-    ctaLine: "¿Tenés un proyecto en mente? Escribime.",
-    hasFullCaseStudy: false,
+    howItWorks: [
+      "Subís tu resumen en PDF",
+      "El sistema extrae y clasifica cada movimiento",
+      "Detecta duplicados y casos a verificar automáticamente",
+      "Te arma el texto de reclamo, listo para copiar y enviar",
+    ],
+    roleAndProcess:
+      "Prodizzi es mi proyecto propio, desarrollado en solitario de punta a punta: backend, frontend, motor de detección y toda la arquitectura. El desarrollo arrancó el 6 de agosto de 2025, y lleva completados 5 sprints, cubriendo el motor de detección completo, el frontend, el sistema de suscripciones, y el flujo de onboarding.",
+    impact: {
+      // Los 4 datos pedidos no se dividen en headline/subline/stats de
+      // forma explícita: se reparten para mantener el mismo tratamiento
+      // editorial que Civil Control (texto grande + riel de números) sin
+      // perder ninguno de los 4 hechos.
+      headline: "Motor de detección con IA integrada",
+      subline: "Compatible con resúmenes de Brubank, Mercado Pago y Cuenta DNI (Banco Provincia).",
+      stats: [
+        { value: "102", label: "tests automatizados" },
+        { value: "5", label: "sprints completados" },
+      ],
+    },
+    ctaLine: "¿Necesitás algo parecido para tu negocio? Escribime.",
+    hasFullCaseStudy: true,
   },
 ];
 

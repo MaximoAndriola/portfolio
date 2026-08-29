@@ -3,8 +3,19 @@ import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ProjectCarousel from "@/components/ProjectCarousel";
-import { ChevronLeftIcon } from "@/components/icons";
+import {
+  ChevronLeftIcon,
+  UploadFileIcon,
+  ClassifyIcon,
+  DuplicateIcon,
+  ClaimReadyIcon,
+} from "@/components/icons";
 import type { CaseStudy } from "@/lib/caseStudies";
+
+// Un ícono de trazo fino por paso de "Cómo funciona", en orden — la lista de
+// pasos es siempre la misma secuencia (subir → clasificar → detectar →
+// generar reclamo), así que alcanza con mapear por índice.
+const HOW_IT_WORKS_ICONS = [UploadFileIcon, ClassifyIcon, DuplicateIcon, ClaimReadyIcon];
 
 /**
  * Template compartido para /proyectos/[slug]. Reusa los mismos componentes,
@@ -15,9 +26,21 @@ import type { CaseStudy } from "@/lib/caseStudies";
  * aviso simple en su lugar.
  */
 export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy }) {
-  const { title, tagline, images, problem, solution, beforeAfter, roleAndProcess, impact, ctaLine } =
-    caseStudy;
-  const hasContent = Boolean(problem || solution || roleAndProcess || beforeAfter.length > 0);
+  const {
+    title,
+    tagline,
+    images,
+    problem,
+    solution,
+    beforeAfter,
+    howItWorks,
+    roleAndProcess,
+    impact,
+    ctaLine,
+  } = caseStudy;
+  const hasContent = Boolean(
+    problem || solution || roleAndProcess || beforeAfter.length > 0 || howItWorks.length > 0
+  );
   const hasImpact = Boolean(impact.headline || impact.stats.length > 0);
 
   // El header ya usó bg-surface, así que la primera sección de contenido
@@ -66,6 +89,44 @@ export default function CaseStudyTemplate({ caseStudy }: { caseStudy: CaseStudy 
             <TextSection bg={nextBg()} eyebrow="Ahora" title="La solución">
               {solution}
             </TextSection>
+          )}
+
+          {howItWorks.length > 0 && (
+            <section className={`${nextBg()} bg-dot-grid py-16 lg:py-24`}>
+              <Container>
+                <Reveal>
+                  <p className="text-[0.8125rem] font-semibold uppercase tracking-wider text-muted">
+                    El flujo
+                  </p>
+                  <h2 className="mt-2 font-heading text-[1.75rem] leading-tight font-semibold text-ink sm:text-4xl lg:text-[2.5rem] lg:leading-[1.15]">
+                    Cómo funciona
+                  </h2>
+                </Reveal>
+
+                <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-8">
+                  {howItWorks.map((step, i) => {
+                    const Icon = HOW_IT_WORKS_ICONS[i % HOW_IT_WORKS_ICONS.length];
+                    return (
+                      <Reveal key={step} delay={i * 80}>
+                        <div className="flex items-start gap-4 sm:block">
+                          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand/10">
+                            <Icon className="h-5 w-5 text-brand" />
+                          </div>
+                          <div className="sm:mt-4">
+                            <span className="font-heading text-sm font-semibold text-brand/50">
+                              {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <p className="mt-1 text-base font-medium leading-snug text-ink sm:text-lg">
+                              {step}
+                            </p>
+                          </div>
+                        </div>
+                      </Reveal>
+                    );
+                  })}
+                </div>
+              </Container>
+            </section>
           )}
 
           {beforeAfter.length > 0 && (

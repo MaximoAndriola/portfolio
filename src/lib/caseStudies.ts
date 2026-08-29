@@ -93,7 +93,9 @@ export const CASE_STUDIES: CaseStudy[] = [
     homeSubtitle: "Mi proyecto propio",
     homeDescription:
       "Una app que analiza tus resúmenes bancarios y detecta automáticamente cobros duplicados o movimientos sospechosos, y te arma el texto listo para hacer el reclamo al banco.",
-    homeNote: "Capturas propias, acá podés mostrar todo lo que quieras",
+    // Sin nota — la de Civil Control existe porque es info real (datos de
+    // ejemplo por confidencialidad); acá no hay nada que aclarar todavía.
+    homeNote: "",
     reversed: true,
     images: getProjectImages({ folder: "prodizzi", prefix: "prodizzi", label: "Prodizzi" }),
     // Todavía sin case study completo — copy pendiente en un próximo prompt.

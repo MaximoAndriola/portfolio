@@ -41,7 +41,9 @@ export default function Projects() {
                   <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
                     {project.homeDescription}
                   </p>
-                  <p className="mt-4 text-sm italic text-muted/80">({project.homeNote})</p>
+                  {project.homeNote && (
+                    <p className="mt-4 text-sm italic text-muted/80">({project.homeNote})</p>
+                  )}
 
                   {project.hasFullCaseStudy && (
                     <Link

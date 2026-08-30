@@ -54,9 +54,11 @@ resultado no puede leerse como una landing genérica armada con un template
 - Acento: `#E8A33D` (ámbar cálido, solo para detalles chicos: eyebrows,
   bordes de badges, un acento en la ilustración del hero)
 - Texto secundario: `#6B7280`
-- Botón de WhatsApp: verde oficial `#25D366` (única excepción a la
+- Botón de WhatsApp: `#1DA851` con texto blanco (única excepción a la
   paleta de marca — es instantáneamente reconocible como "acción de
-  contacto", conviene mantenerlo así)
+  contacto", conviene mantenerlo así). Verde elegido a propósito más
+  oscuro que el oficial `#25D366` de WhatsApp para acercar el contraste
+  del texto blanco a WCAG AA sin perder el reconocible "botón verde".
 
 ### Tipografía y escala
 - Títulos: `Space Grotesk`, peso 600-700, uso moderado (nunca todo en

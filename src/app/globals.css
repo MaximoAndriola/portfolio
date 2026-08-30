@@ -10,8 +10,8 @@
   --color-muted: #6b7280;
   --color-brand: #1d4e89;
   --color-accent: #e8a33d;
-  --color-whatsapp: #25d366;
-  --color-whatsapp-hover: #1fb958;
+  --color-whatsapp: #1da851;
+  --color-whatsapp-hover: #198f45;
 
   --font-heading: var(--font-space-grotesk), "Space Grotesk", sans-serif;
   --font-body: var(--font-inter), "Inter", sans-serif;
@@ -84,6 +84,60 @@ body {
   );
   background-size: 22px 22px;
   background-attachment: fixed;
+}
+
+/* Botón de WhatsApp (hero, contacto, FAB mobile) — clase compartida para no
+   duplicar la textura/animación en cada componente. Dos pseudo-elementos:
+   ::before = grano fino (textura, siempre visible, detrás del contenido para
+   no afectar el contraste del texto). ::after = destello diagonal que barre
+   el botón cada 5s con una pausa larga entre pasadas (arriba del contenido a
+   propósito: es un glint que cruza por encima, el efecto pedido).
+   overflow:hidden en el botón contiene ambos a la forma redondeada.
+   La animación del destello ya respeta prefers-reduced-motion vía la regla
+   global de abajo (fuerza duration a ~0), igual que el resto del sitio. */
+.whatsapp-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.whatsapp-cta::before,
+.whatsapp-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Grano muy fino vía feTurbulence, opacidad 3.5% — se percibe como textura
+   de superficie, no como un patrón. */
+.whatsapp-cta::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+  opacity: 0.035;
+}
+
+.whatsapp-cta::after {
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.45) 48%,
+    rgb(255 255 255 / 0.45) 52%,
+    transparent 70%
+  );
+  background-size: 250% 250%;
+  background-position: -60% -60%;
+  animation: whatsapp-shine-sweep 5s ease-in-out infinite;
+}
+
+@keyframes whatsapp-shine-sweep {
+  0%,
+  10% {
+    background-position: -60% -60%;
+  }
+  22%,
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 /* Foco visible consistente en todos los elementos interactivos. */

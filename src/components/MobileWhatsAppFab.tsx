@@ -9,8 +9,9 @@ import { WhatsAppIcon } from "@/components/icons";
  * Botón flotante de WhatsApp, solo mobile (<768px), aparece después de
  * scrollear más allá del hero.
  *
- * whatsapp-cta (globals.css) agrega el mismo grano fino y destello diagonal
- * que WhatsAppButton — clase compartida para no duplicar esa lógica acá.
+ * whatsapp-cta (globals.css) agrega el mismo grano fino y pulso de sombra
+ * sutil en idle que WhatsAppButton — clase compartida para no duplicar esa
+ * lógica acá.
  */
 export default function MobileWhatsAppFab() {
   const [visible, setVisible] = useState(false);
@@ -47,6 +48,7 @@ export default function MobileWhatsAppFab() {
           : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >
+      <span aria-hidden="true" className="whatsapp-cta__grain" />
       <WhatsAppIcon className="h-7 w-7" />
     </a>
   );

@@ -25,8 +25,11 @@ type WhatsAppButtonProps = {
  * cliente por sobre el criterio de WCAG AA estricto (4.5:1) — ver historial,
  * quedó documentado que se optó a propósito por mantener texto blanco.
  *
- * whatsapp-cta (globals.css) agrega el grano fino y el destello diagonal,
- * compartida con MobileWhatsAppFab para no duplicar esa lógica.
+ * whatsapp-cta (globals.css) agrega el grano fino y un pulso de sombra muy
+ * sutil en idle, compartida con MobileWhatsAppFab para no duplicar esa
+ * lógica. El grano vive en un span interno aparte (whatsapp-cta__grain)
+ * — ver el comentario en globals.css sobre por qué no puede compartir
+ * overflow:hidden con el botón que lleva el pulso de sombra.
  */
 export default function WhatsAppButton({
   size = "lg",
@@ -47,6 +50,7 @@ export default function WhatsAppButton({
       onClick={() => track("whatsapp_click", { location })}
       className={`whatsapp-cta group inline-flex min-h-[44px] items-center justify-center gap-2.5 rounded-xl bg-whatsapp font-semibold text-white shadow-sm transition-all duration-200 hover:scale-[1.02] hover:bg-whatsapp-hover hover:shadow-lg active:scale-[1.02] active:shadow-lg ${sizeClasses} ${className}`}
     >
+      <span aria-hidden="true" className="whatsapp-cta__grain" />
       <WhatsAppIcon className="h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
       {children}
     </a>

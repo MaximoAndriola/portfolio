@@ -87,57 +87,57 @@ body {
 }
 
 /* Botón de WhatsApp (hero, contacto, FAB mobile) — clase compartida para no
-   duplicar la textura/animación en cada componente. Dos pseudo-elementos:
-   ::before = grano fino (textura, siempre visible, detrás del contenido para
-   no afectar el contraste del texto). ::after = destello diagonal que barre
-   el botón cada 5s con una pausa larga entre pasadas (arriba del contenido a
-   propósito: es un glint que cruza por encima, el efecto pedido).
-   overflow:hidden en el botón contiene ambos a la forma redondeada.
-   La animación del destello ya respeta prefers-reduced-motion vía la regla
-   global de abajo (fuerza duration a ~0), igual que el resto del sitio. */
+   duplicar la textura/animación en cada componente.
+
+   El grano vive en un span interno (.whatsapp-cta__grain, ver
+   WhatsAppButton/MobileWhatsAppFab) en vez de en el propio botón: ese span
+   tiene su propio overflow:hidden para recortarse a la forma redondeada.
+   No puede vivir overflow:hidden en el mismo elemento que el pulso de
+   box-shadow de abajo — overflow:hidden recorta también la sombra propia
+   del elemento, así que el glow quedaría invisible si compartieran nodo. */
 .whatsapp-cta {
   position: relative;
-  overflow: hidden;
+  animation: whatsapp-idle-glow 7s ease-in-out infinite;
 }
 
-.whatsapp-cta::before,
-.whatsapp-cta::after {
-  content: "";
+/* Al interactuar, el hover/press (shadow-lg/xl de Tailwind) tiene que ganar
+   sin pelear con el pulso — animation:none libera el box-shadow de vuelta
+   a la cascada normal, no alcanza con pausar la animación (un frame
+   pausado sigue "ganando" la propiedad). Vuelve a arrancar desde 0% al
+   soltar, que es imperceptible para un ciclo de respiración como este. */
+.whatsapp-cta:hover,
+.whatsapp-cta:active {
+  animation: none;
+}
+
+/* Pulso de sombra "vivo": ciclo lento (7s) entre la sombra base y una
+   versión apenas más marcada, tintada del mismo verde de marca — nada de
+   escala ni posición acá, solo box-shadow, y casi imperceptible a propósito. */
+@keyframes whatsapp-idle-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 1px 2px 0 rgb(0 0 0 / 0.05),
+      0 0 0 0 transparent;
+  }
+  50% {
+    box-shadow:
+      0 1px 2px 0 rgb(0 0 0 / 0.05),
+      0 6px 18px -2px color-mix(in srgb, var(--color-whatsapp) 32%, transparent);
+  }
+}
+
+.whatsapp-cta__grain {
   position: absolute;
   inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
   pointer-events: none;
-}
-
-/* Grano muy fino vía feTurbulence, opacidad 3.5% — se percibe como textura
-   de superficie, no como un patrón. */
-.whatsapp-cta::before {
+  /* Grano muy fino vía feTurbulence, opacidad 3.5% — se percibe como
+     textura de superficie, no como un patrón. */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 120px 120px;
   opacity: 0.035;
-}
-
-.whatsapp-cta::after {
-  background: linear-gradient(
-    115deg,
-    transparent 30%,
-    rgb(255 255 255 / 0.45) 48%,
-    rgb(255 255 255 / 0.45) 52%,
-    transparent 70%
-  );
-  background-size: 250% 250%;
-  background-position: -60% -60%;
-  animation: whatsapp-shine-sweep 5s ease-in-out infinite;
-}
-
-@keyframes whatsapp-shine-sweep {
-  0%,
-  10% {
-    background-position: -60% -60%;
-  }
-  22%,
-  100% {
-    background-position: 100% 100%;
-  }
 }
 
 /* Foco visible consistente en todos los elementos interactivos. */

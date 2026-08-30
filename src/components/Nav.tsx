@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
+import AboutPanel from "@/components/AboutPanel";
 
 // Rutas absolutas con ancla (no "#servicios" a secas): así el nav funciona
 // igual desde el home que desde una página de caso de estudio, sin
@@ -16,11 +17,15 @@ const LINKS = [
 ];
 
 /**
- * Nav sticky, solo desktop (≥768px, spec pide no agregar menú en mobile).
- * Fondo transparente hasta que se scrollea, después blur + color de fondo.
+ * Nav sticky. La lista de links sigue siendo solo desktop (≥768px, spec
+ * pide no agregar menú en mobile) — pero el header en sí ahora es visible
+ * en todos los tamaños porque el monograma "M" que dispara AboutPanel es
+ * un elemento único y persistente, no parte del menú. Fondo transparente
+ * hasta que se scrollea, después blur + color de fondo.
  */
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -31,22 +36,27 @@ export default function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-40 hidden transition-colors duration-300 md:block ${
+      className={`sticky top-0 z-40 transition-colors duration-300 ${
         scrolled ? "bg-surface/80 shadow-sm backdrop-blur-md" : "bg-transparent"
       }`}
     >
       <Container>
         <nav className="flex items-center justify-between py-4">
-          <Link
-            href="/#inicio"
-            className="group font-heading text-lg font-semibold text-ink"
+          <button
+            type="button"
+            onClick={() => setAboutOpen(true)}
+            aria-label="Sobre mí"
+            className="monogram-trigger flex items-center gap-2.5 transition-transform duration-200 hover:scale-[1.05] active:scale-[1.05]"
           >
-            Maximo
-            <span className="text-brand transition-transform duration-300 inline-block group-hover:rotate-[20deg]">
-              .
+            <span className="monogram-ring flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand font-heading text-sm font-bold text-white">
+              M
             </span>
-          </Link>
-          <ul className="flex items-center gap-8 text-sm font-medium text-muted">
+            <span className="hidden font-heading text-lg font-semibold text-ink md:inline">
+              Maximo<span className="text-brand">.</span>
+            </span>
+          </button>
+
+          <ul className="hidden items-center gap-8 text-sm font-medium text-muted md:flex">
             {LINKS.map((link) => (
               <li key={link.href}>
                 <Link
@@ -61,6 +71,8 @@ export default function Nav() {
           </ul>
         </nav>
       </Container>
+
+      {aboutOpen && <AboutPanel onClose={() => setAboutOpen(false)} />}
     </header>
   );
 }

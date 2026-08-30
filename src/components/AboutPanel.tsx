@@ -5,14 +5,14 @@ import { createPortal } from "react-dom";
 import { XIcon } from "@/components/icons";
 
 const ABOUT_TEXT =
-  "Soy de Mar del Plata, tomo mate mientras programo, y para mí la creatividad sin responsabilidad es solo una buena idea que nunca llega a ningún lado. Por eso, cuando prometo un plazo, lo cumplo — y si algo no sale como esperaba, aviso antes de que me pregunten. No hay un equipo de ventas del otro lado de la pantalla: soy yo. Así que si en algún momento charlamos, vas a hablar siempre con la misma persona, de principio a fin — y tu proyecto lo voy a cuidar como si fuera mío.";
+  "Soy de Mar del Plata, tomo mate mientras programo, y estudié administración de empresas antes de meterme de lleno en el desarrollo — esa mezcla es la que uso todos los días: entender primero cómo funciona un negocio, después escribir el código. Cada proyecto que tomo lo llevo yo, de principio a fin, sin vueltas. Si te prometo un plazo, lo cumplo — y si algo se atrasa, te aviso antes de que preguntes.";
 
 /**
- * Panel deslizante con una historia personal corta, disparado por el
- * monograma "M" del header (ver Nav.tsx). Mismo patrón de portal +
- * Escape + bloqueo de scroll que Lightbox.tsx, con el agregado de foco
- * atrapado y devuelto al trigger — acá sí hace falta: es un diálogo con
- * texto para leer, no una imagen que se cierra al toque.
+ * Panel deslizante con una historia personal corta, disparado por
+ * "Maximo." en el header (ver Nav.tsx). Mismo patrón de portal + Escape +
+ * bloqueo de scroll que Lightbox.tsx, con el agregado de foco atrapado y
+ * devuelto al trigger — acá sí hace falta: es un diálogo con texto para
+ * leer, no una imagen que se cierra al toque.
  *
  * Entra en dos pasos (mount en estado "cerrado" → rAF → estado "abierto")
  * para que la transición realmente se vea; sin eso no hay from/to y
@@ -101,13 +101,11 @@ export default function AboutPanel({ onClose }: { onClose: () => void }) {
         </button>
 
         <div className="px-6 pb-10 pt-20 sm:px-8">
-          <div className="flex justify-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand font-heading text-2xl font-bold text-white">
-              M
-            </span>
-          </div>
+          <p className="text-[0.8125rem] font-semibold uppercase tracking-wider text-muted">
+            Quién soy
+          </p>
 
-          <p className="mt-8 text-base leading-relaxed text-ink sm:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-ink sm:text-lg">
             {ABOUT_TEXT}
           </p>
         </div>

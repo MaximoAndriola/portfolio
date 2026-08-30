@@ -19,8 +19,8 @@ const LINKS = [
 /**
  * Nav sticky. La lista de links sigue siendo solo desktop (≥768px, spec
  * pide no agregar menú en mobile) — pero el header en sí ahora es visible
- * en todos los tamaños porque el monograma "M" que dispara AboutPanel es
- * un elemento único y persistente, no parte del menú. Fondo transparente
+ * en todos los tamaños porque "Maximo." (trigger de AboutPanel) es un
+ * elemento único y persistente, no parte del menú. Fondo transparente
  * hasta que se scrollea, después blur + color de fondo.
  */
 export default function Nav() {
@@ -34,6 +34,22 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // En un dispositivo sin hover real (mobile), el toque no tiene forma de
+  // "mostrar antes" la animación del punto como sí pasa en desktop al
+  // pasar el mouse — por eso ahí se retrasa un toque la apertura del panel,
+  // lo justo para que se alcance a ver el punto dibujando el subrayado
+  // antes de que el panel tape todo. En desktop (hover: hover) abre directo,
+  // total el hover ya mostró la animación antes del click.
+  const openAbout = () => {
+    const canHover =
+      typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches;
+    if (canHover) {
+      setAboutOpen(true);
+    } else {
+      setTimeout(() => setAboutOpen(true), 220);
+    }
+  };
+
   return (
     <header
       className={`sticky top-0 z-40 transition-colors duration-300 ${
@@ -44,16 +60,12 @@ export default function Nav() {
         <nav className="flex items-center justify-between py-4">
           <button
             type="button"
-            onClick={() => setAboutOpen(true)}
+            onClick={openAbout}
             aria-label="Sobre mí"
-            className="monogram-trigger flex items-center gap-2.5 transition-transform duration-200 hover:scale-[1.05] active:scale-[1.05]"
+            className="maximo-trigger relative inline-block font-heading text-lg font-semibold text-ink"
           >
-            <span className="monogram-ring flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand font-heading text-sm font-bold text-white">
-              M
-            </span>
-            <span className="hidden font-heading text-lg font-semibold text-ink md:inline">
-              Maximo<span className="text-brand">.</span>
-            </span>
+            Maximo
+            <span className="maximo-dot" aria-hidden="true" />
           </button>
 
           <ul className="hidden items-center gap-8 text-sm font-medium text-muted md:flex">

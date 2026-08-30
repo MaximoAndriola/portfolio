@@ -140,34 +140,31 @@ body {
   opacity: 0.035;
 }
 
-/* Monograma "M" del header (ver Nav.tsx / AboutPanel.tsx) — anillo idle
-   lentísimo alrededor del círculo, casi imperceptible a propósito (lección
-   del botón de WhatsApp: menos es más). "Opacidad entre 15% y 30%" se lee
-   como el alfa del anillo, no del monograma entero — a esa opacidad la
-   letra "M" sería casi invisible, y el pedido es sugerir sutileza, no
-   ocultar el trigger. En hover/active/focus, animation:none libera el
-   box-shadow de vuelta a la cascada (mismo motivo que en whatsapp-cta: un
-   frame de animación pausado sigue ganando la propiedad). */
-.monogram-ring {
-  animation: monogram-ring-pulse 4s ease-in-out infinite;
-  transition: box-shadow 180ms ease;
+/* Trigger "Maximo." del header (ver Nav.tsx / AboutPanel.tsx) — sin
+   monograma, es el texto solo. El punto final es un span aparte que hace
+   doble función: en reposo se ve como un punto (barra angosta, casi
+   cuadrada, con border-radius) y en hover/tap se estira con scaleX hasta
+   cubrir todo el ancho de "Maximo", leyéndose como el subrayado
+   dibujándose. transform-origin: right ancla el punto en su lugar y hace
+   que el crecimiento se sienta "de derecha a izquierda". Nada de scaleY
+   ni cambios de tamaño del texto — solo scaleX + un translateX chico,
+   tal cual se pidió. */
+.maximo-dot {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -0.1em;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-brand);
+  transform-origin: right center;
+  transform: scaleX(0.08) translateX(-1px);
+  transition: transform 200ms ease-out;
 }
 
-.monogram-trigger:hover .monogram-ring,
-.monogram-trigger:active .monogram-ring,
-.monogram-trigger:focus-visible .monogram-ring {
-  animation: none;
-  box-shadow: 0 4px 14px color-mix(in srgb, var(--color-brand) 40%, transparent);
-}
-
-@keyframes monogram-ring-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-brand) 15%, transparent);
-  }
-  50% {
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-brand) 30%, transparent);
-  }
+.maximo-trigger:hover .maximo-dot,
+.maximo-trigger:active .maximo-dot,
+.maximo-trigger:focus-visible .maximo-dot {
+  transform: scaleX(1) translateX(0);
 }
 
 /* Foco visible consistente en todos los elementos interactivos. */

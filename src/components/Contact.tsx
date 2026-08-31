@@ -1,6 +1,7 @@
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import ProjectRequestForm from "@/components/ProjectRequestForm";
 import { CONTACT } from "@/lib/constants";
 import { MailIcon, LinkedInIcon } from "@/components/icons";
 
@@ -44,6 +45,8 @@ export default function Contact() {
               LinkedIn
             </a>
           </div>
+
+          <ProjectRequestForm />
         </Reveal>
       </Container>
     </section>

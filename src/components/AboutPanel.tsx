@@ -4,9 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { XIcon } from "@/components/icons";
 
-const ABOUT_TEXT =
-  "Soy de Mar del Plata, tomo mate mientras programo, y estudié administración de empresas antes de meterme de lleno en el desarrollo — esa mezcla es la que uso todos los días: entender primero cómo funciona un negocio, después escribir el código. Cada proyecto que tomo lo llevo yo, de principio a fin, sin vueltas. Si te prometo un plazo, lo cumplo — y si algo se atrasa, te aviso antes de que preguntes.";
-
 /**
  * Panel deslizante con una historia personal corta, disparado por
  * "Maximo." en el header (ver Nav.tsx). Mismo patrón de portal + Escape +
@@ -19,6 +16,12 @@ const ABOUT_TEXT =
  * aparece directo. Eso es justo lo que pide prefers-reduced-motion, y ya
  * lo resuelve gratis la regla global de globals.css (transition-duration
  * a ~0), no hace falta duplicar la lógica acá.
+ *
+ * Contenido y trato tipográfico a propósito distintos de la sección
+ * "Sobre mí" del cuerpo (About.tsx): acá no se repite la formación
+ * académica (ya está ahí), no hay pull-quote con borde, y los tres
+ * párrafos van al mismo tamaño — se lee como una carta corta, no como
+ * texto editorial con jerarquía.
  */
 export default function AboutPanel({ onClose }: { onClose: () => void }) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -105,9 +108,25 @@ export default function AboutPanel({ onClose }: { onClose: () => void }) {
             Quién soy
           </p>
 
-          <p className="mt-4 text-base leading-relaxed text-ink sm:text-lg">
-            {ABOUT_TEXT}
-          </p>
+          <div className="mt-4 space-y-6">
+            <p className="text-base leading-[1.8] text-ink sm:text-lg">
+              Soy de Mar del Plata, tomo mate mientras programo, y trabajo
+              con la misma calma con la que lo tomo: sin apuro, pero sin
+              soltar hasta que algo queda bien hecho.
+            </p>
+            <p className="text-base leading-[1.8] text-ink sm:text-lg">
+              Para mí la creatividad sin responsabilidad es solo una buena
+              idea que nunca llega a ningún lado. Por eso,{" "}
+              <span className="font-semibold text-brand">
+                cuando prometo un plazo, lo cumplo
+              </span>{" "}
+              — y si algo se atrasa, aviso antes de que me pregunten.
+            </p>
+            <p className="text-base leading-[1.8] text-ink sm:text-lg">
+              No hay nadie más del otro lado de la pantalla: cada proyecto
+              que tomo, lo llevo yo, de principio a fin.
+            </p>
+          </div>
         </div>
       </div>
     </>,

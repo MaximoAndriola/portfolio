@@ -27,6 +27,8 @@ export default function Contact() {
 
           <WhatsAppButton location="contacto" className="mt-6 w-full" />
 
+          <ProjectRequestForm />
+
           <div className="mt-6 flex flex-col gap-3">
             <a
               href={`mailto:${CONTACT.email}`}
@@ -45,8 +47,6 @@ export default function Contact() {
               LinkedIn
             </a>
           </div>
-
-          <ProjectRequestForm />
         </Reveal>
       </Container>
     </section>

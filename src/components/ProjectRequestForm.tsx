@@ -12,10 +12,12 @@ const INPUT_CLASS =
 const LABEL_CLASS = "block text-sm font-medium text-ink";
 
 /**
- * Bloque secundario debajo del CTA de WhatsApp — colapsado por default a
- * propósito, para no competirle visualmente (ver CLAUDE.md § "Reglas
- * estrictas": WhatsApp es el CTA principal en toda la página). Un link de
- * texto lo despliega inline; nada de modal ni de navegar a otra página.
+ * Bloque secundario justo debajo del CTA de WhatsApp — colapsado por
+ * default, un botón outline (no relleno) lo despliega inline. Jerarquía
+ * clara sin invisibilizarlo: WhatsApp sigue siendo el único CTA relleno
+ * de toda la página (ver CLAUDE.md § "Reglas estrictas"), pero esto ya
+ * no es un link de texto suelto — es un botón real, mismo ancho y
+ * border-radius que WhatsAppButton, solo que con borde en vez de fondo.
  *
  * Truco del grid-rows para el acordeón (0fr → 1fr + overflow-hidden en el
  * hijo) en vez de max-height con un valor mágico: anima a la altura real
@@ -58,17 +60,17 @@ export default function ProjectRequestForm() {
   }
 
   return (
-    <div className="mt-8 border-t border-ink/10 pt-6">
+    <div className="mt-4">
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="project-request-panel"
-        className="group inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-colors hover:text-ink"
+        className="group inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border-2 border-brand px-7 py-4 text-base font-semibold text-brand transition-colors hover:bg-brand/10 sm:text-lg"
       >
-        ¿Preferís dejar los detalles por escrito?
+        Contame por escrito
         <ArrowDownIcon
-          className="h-4 w-4 -rotate-90 transition-transform duration-200 group-hover:translate-x-0.5"
+          className="h-4 w-4 shrink-0 -rotate-90 transition-transform duration-200 group-hover:translate-x-0.5"
           strokeWidth="2.25"
         />
       </button>

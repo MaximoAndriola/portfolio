@@ -270,12 +270,19 @@ frena a mucha gente antes de escribir)
   `.com` vía Namecheap/Cloudflare). Mientras tanto, usar el subdominio
   gratuito que asigna Vercel.
 
-## Feature futura (no bloquea el lanzamiento de hoy)
-Sección de "agendar turno/consulta": formulario con datos del cliente →
-notificación por mail a Maximo → mail de confirmación automático al
-cliente. Se puede resolver con una API route de Next.js + un servicio de
-envío de mails (ej. Resend). No implementar hoy, pero tenerlo en mente al
-estructurar el proyecto para que sumarlo después sea simple.
+## Formulario de solicitud de proyecto (implementado)
+Bloque secundario debajo de Contacto ("¿Preferís dejar los detalles por
+escrito?"), colapsado por default para no competirle al botón de
+WhatsApp. Formulario en `src/components/ProjectRequestForm.tsx`, API
+route en `src/app/api/contact/route.ts`, envío de mails vía Resend
+(notificación a Maximo + confirmación automática al cliente).
+
+Requiere la env var `RESEND_API_KEY` configurada en Vercel (Project
+Settings → Environment Variables) — ver `.env.example`. Sin esa key la
+API route responde 500 en vez de romper. El remitente hoy es
+`onboarding@resend.dev` (testing de Resend, sin dominio propio
+verificado); cuando el dominio (ver más arriba) esté verificado en
+Resend, cambiar `FROM_EMAIL` en la API route.
 
 ## Qué hacer ante decisiones no definidas acá
 Si aparece algo que este documento no cubre (un texto, un detalle visual,

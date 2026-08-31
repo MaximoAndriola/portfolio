@@ -19,18 +19,37 @@ export default function About() {
           <h2 className="mt-2 font-heading text-[1.75rem] leading-tight font-semibold text-ink sm:text-4xl lg:text-[2.5rem] lg:leading-[1.15]">
             Sobre mí
           </h2>
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-            Soy desarrollador full-stack de Mar del Plata. Construyo software
-            a medida — desde páginas web hasta sistemas de gestión completos —
-            con una mirada que viene de haber trabajado también en la
-            administración y gestión de organizaciones. Esa combinación es la
-            que más valor le da a lo que hago: no solo escribo código,
-            entiendo cómo funciona un negocio por dentro antes de tocar una
-            línea, así el sistema que construyo se ajusta a cómo trabajás de
-            verdad, no al revés. Hoy además estoy construyendo mi propio
-            producto, Prodizzi, aplicando esa misma lógica: identificar un
-            problema real y resolverlo con tecnología.
-          </p>
+          {/* Editorial, no un bloque corrido: lede grande, cuerpo, un
+              pull-quote con borde y color de marca, cuerpo de nuevo.
+              text-ink en el lede (no muted) a propósito — es el único
+              párrafo pensado para "engancha primero", el resto es texto
+              de apoyo. space-y-5 da el ritmo vertical entre los cuatro
+              sin repetir mt- en cada uno. */}
+          <div className="mt-5 max-w-2xl space-y-5">
+            <p className="text-[1.125rem] font-medium leading-relaxed text-ink sm:text-[1.25rem]">
+              Soy desarrollador full-stack de Mar del Plata. Me recibí en
+              Administración de Empresas y también en Programación — dos
+              títulos que en general no van juntos, pero que para mí
+              terminaron siendo el mismo camino.
+            </p>
+            <p className="text-base leading-relaxed text-muted sm:text-lg">
+              Construyo software a medida —desde páginas web hasta sistemas
+              de gestión completos— con una mirada que viene de haber
+              estudiado también cómo funciona una organización por dentro.
+              No solo escribo código: entiendo primero el problema real de
+              un negocio, y recién después empiezo a programar.
+            </p>
+            <p className="border-l-[3px] border-brand pl-5 font-heading text-[1.0625rem] font-medium leading-relaxed text-brand sm:pl-6">
+              Esa combinación es la que más valor le da a lo que hago: el
+              sistema que construyo se ajusta a cómo trabajás de verdad, no
+              al revés.
+            </p>
+            <p className="text-base leading-relaxed text-muted sm:text-lg">
+              Hoy además estoy construyendo mi propio producto, Prodizzi,
+              aplicando esa misma lógica: identificar un problema real y
+              resolverlo con tecnología.
+            </p>
+          </div>
         </Reveal>
       </Container>
     </section>
